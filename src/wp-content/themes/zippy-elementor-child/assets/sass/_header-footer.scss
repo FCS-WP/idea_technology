@@ -1,0 +1,28 @@
+/* Header Block */
+
+#header-block {
+  .desktop-menu {
+    .elementor-item {
+      transition: color 0.25s ease;
+      font-weight: 600;
+      color: #cdcdcd;
+    }
+
+    .elementor-item:hover,
+    .elementor-item-active {
+      color: var(--e-global-color-accent);
+    }
+  }
+}
+
+/* Footer Block */
+#footer-block {
+  .footer-content {
+    .e-con-full {
+      &:first-child {
+        margin-top: auto;
+        margin-bottom: auto;
+      }
+    }
+  }
+}
