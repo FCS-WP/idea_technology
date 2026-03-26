@@ -2,6 +2,7 @@
 namespace ElementorPro\Modules\Woocommerce\Widgets;
 
 use ElementorPro\Modules\Woocommerce\Module;
+use ElementorPro\Modules\Woocommerce\Traits\Send_App_Plg_Trait;
 use ElementorPro\Plugin;
 use Elementor\Controls_Manager;
 use Elementor\Group_Control_Box_Shadow;
@@ -18,6 +19,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Cart extends Base_Widget {
+	use Send_App_Plg_Trait;
 
 	public function get_name() {
 		return 'woocommerce-cart';
@@ -46,8 +48,8 @@ class Cart extends Base_Widget {
 		];
 	}
 
-	public function get_style_depends() {
-		return [ 'select2' ];
+	public function get_style_depends(): array {
+		return [ 'widget-woocommerce-cart', 'select2' ];
 	}
 
 	protected function register_controls() {
@@ -57,6 +59,8 @@ class Cart extends Base_Widget {
 				'label' => esc_html__( 'General', 'elementor-pro' ),
 			]
 		);
+
+		$this->maybe_add_send_app_promotion_control( $this );
 
 		$this->add_control(
 			'cart_layout',
@@ -2358,10 +2362,10 @@ class Cart extends Base_Widget {
 		<div class="coupon e-cart-section shop_table">
 			<div class="form-row coupon-col">
 				<div class="coupon-col-start">
-					<input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php esc_attr_e( 'Coupon code', 'elementor-pro' ); ?>" />
+					<input type="text" name="coupon_code" class="input-text" id="coupon_code" value="" placeholder="<?php echo esc_attr__( 'Coupon code', 'elementor-pro' ); ?>" />
 				</div>
 				<div class="coupon-col-end">
-					<button <?php $this->print_render_attribute_string( 'button_coupon' ); ?> value="<?php esc_attr_e( 'Apply coupon', 'elementor-pro' ); ?>"><?php esc_attr_e( 'Apply coupon', 'elementor-pro' ); ?></button>
+					<button <?php $this->print_render_attribute_string( 'button_coupon' ); ?> value="<?php echo esc_attr__( 'Apply coupon', 'elementor-pro' ); ?>"><?php echo esc_html__( 'Apply coupon', 'elementor-pro' ); ?></button>
 				</div>
 				<?php do_action( 'woocommerce_cart_coupon' ); ?>
 			</div>

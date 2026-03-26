@@ -5,6 +5,7 @@ use Elementor\Controls_Manager;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Typography;
+use ElementorPro\Modules\Woocommerce\Traits\Send_App_Plg_Trait;
 use ElementorPro\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -12,6 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 class Product_Add_To_Cart extends Base_Widget {
+	use Send_App_Plg_Trait;
 
 	public function get_name() {
 		return 'woocommerce-product-add-to-cart';
@@ -27,6 +29,24 @@ class Product_Add_To_Cart extends Base_Widget {
 
 	public function get_keywords() {
 		return [ 'woocommerce', 'shop', 'store', 'cart', 'product', 'button', 'add to cart' ];
+	}
+
+	public function has_widget_inner_wrapper(): bool {
+		return ! Plugin::elementor()->experiments->is_feature_active( 'e_optimized_markup' );
+	}
+
+	/**
+	 * Get style dependencies.
+	 *
+	 * Retrieve the list of style dependencies the widget requires.
+	 *
+	 * @since 3.24.0
+	 * @access public
+	 *
+	 * @return array Widget style dependencies.
+	 */
+	public function get_style_depends(): array {
+		return [ 'widget-woocommerce-product-add-to-cart' ];
 	}
 
 	protected function render() {
@@ -174,6 +194,8 @@ class Product_Add_To_Cart extends Base_Widget {
 			]
 		);
 
+		$this->maybe_add_send_app_promotion_control( $this );
+
 		$this->add_control(
 			'layout',
 			[
@@ -202,8 +224,7 @@ class Product_Add_To_Cart extends Base_Widget {
 		$this->add_control(
 			'wc_style_warning',
 			[
-				// TODO: Remove define() with the release of Elementor 3.22
-				'type' => defined( 'Controls_Manager::ALERT' ) ? Controls_Manager::ALERT : 'alert',
+				'type' => Controls_Manager::ALERT,
 				'alert_type' => 'info',
 				'content' => esc_html__( 'The style of this widget is often affected by your theme and plugins. If you experience any such issue, try to switch to a basic theme and deactivate related plugins.', 'elementor-pro' ),
 			]

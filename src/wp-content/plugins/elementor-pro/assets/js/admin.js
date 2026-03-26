@@ -1,4 +1,4 @@
-/*! elementor-pro - v3.23.0 - 23-07-2024 */
+/*! elementor-pro - v3.33.0 - 11-11-2025 */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -25,6 +25,7 @@ class Module extends elementorModules.Module {
   }];
   onInit() {
     this.assignMenuItemActions();
+    this.assignProLicenseActivateEvent();
   }
   assignMenuItemActions() {
     window.addEventListener('DOMContentLoaded', () => {
@@ -38,6 +39,28 @@ class Module extends elementorModules.Module {
           window.open(item.external_url, '_blank');
         });
       });
+    });
+  }
+  assignProLicenseActivateEvent() {
+    window.addEventListener('DOMContentLoaded', () => {
+      const activateButton = document.querySelector('.button-primary[href*="elementor-connect"]');
+      if (activateButton) {
+        activateButton.addEventListener('click', () => {
+          if (!window.elementorCommon?.config?.experimentalFeatures?.editor_events) {
+            return;
+          }
+          const eventsManager = window.elementorCommon?.eventsManager || {};
+          const dispatchEvent = eventsManager.dispatchEvent?.bind(eventsManager);
+          const eventName = 'pro_license_activate';
+          const eventData = {
+            app_type: 'editor',
+            location: 'Elementor WP-admin pages',
+            secondaryLocation: 'license page',
+            trigger: 'click'
+          };
+          dispatchEvent?.(eventName, eventData);
+        });
+      }
     });
   }
 }
@@ -128,7 +151,6 @@ class CustomAssetsBase extends elementorModules.ViewModule {
     // OnConfirm
     () => this.onDialogDismiss() // OnHide
     );
-
     return false;
   }
   bindEvents() {
@@ -515,7 +537,6 @@ class CustomFontsManager extends _customAssetsBase.default {
         return false; // If a value was found, break the loop
       }
     });
-
     return hasValue;
   }
   removeCloseHandle() {
@@ -535,6 +556,39 @@ class CustomFontsManager extends _customAssetsBase.default {
     this.titleRequired();
     settings.fields.upload.init();
     settings.fields.repeater.init();
+    const $document = jQuery(document);
+    const markMetaboxIfVariableFont = this.markMetaboxIfVariableFont.bind(this);
+    jQuery('#add-variable-font').on('click', () => {
+      jQuery(document).one('onRepeaterNewRow', (event, $repeaterBtn, $repeaterBlock) => {
+        $repeaterBlock.find('input[name$="font_type]"]').val('variable');
+        markMetaboxIfVariableFont();
+      });
+      jQuery('#elementor-font-custommetabox').find('.add-repeater-row').trigger('click');
+    });
+    $document.on('onRepeaterNewRow', markMetaboxIfVariableFont);
+    $document.on('onRepeaterRemoveRow', markMetaboxIfVariableFont);
+    $document.on('change', 'input[name$="variable_width]"], input[name$="variable_weight]"]', this.onFontVariableTypeChange);
+    markMetaboxIfVariableFont();
+  }
+  markMetaboxIfVariableFont() {
+    const $fontType = jQuery('input[name$="font_type]"]');
+    const $metaboxContent = jQuery('.elementor-metabox-content');
+    $metaboxContent.removeClass('has-font-variable has-font-static');
+    if (!$fontType.length) {
+      return;
+    }
+    const hasVariableRow = 'variable' === $fontType.val();
+    if (hasVariableRow) {
+      $metaboxContent.addClass('has-font-variable', hasVariableRow);
+    } else {
+      $metaboxContent.addClass('has-font-static');
+    }
+    jQuery('input[name$="variable_width]"], input[name$="variable_weight]"]').each(this.onFontVariableTypeChange);
+  }
+  onFontVariableTypeChange() {
+    const $this = jQuery(this);
+    const wrapDiv = $this.parents().eq(1);
+    wrapDiv.toggleClass('e-font-variable-hidden', !$this.is(':checked'));
   }
 }
 exports["default"] = CustomFontsManager;
@@ -745,13 +799,14 @@ module.exports = {
   remove(btn) {
     var self = this;
     jQuery(btn).closest(self.selectors.block).remove();
+    self.trigger('onRepeaterRemoveRow', [btn]);
   },
   toggle(btn) {
     var self = this,
       $btn = jQuery(btn),
       $table = $btn.closest(self.selectors.block).find(self.selectors.table),
       $toggleLabel = $btn.closest(self.selectors.block).find(self.selectors.repeaterLabel);
-    $table.toggle(0, 'none', function () {
+    $table.toggle(0, function () {
       if ($table.is(':visible')) {
         $table.closest(self.selectors.block).addClass('block-visible');
         self.trigger('onRepeaterToggleVisible', [$btn, $table, $toggleLabel]);
@@ -1198,6 +1253,20 @@ module.exports = function () {
   this.mailChimp = new ApiValidations('mailchimp_api_key');
   this.mailerLite = new ApiValidations('mailerlite_api_key');
   this.activeCcampaign = new ApiValidations('activecampaign_api_key', 'activecampaign_api_url');
+  jQuery('.e-notice--cta.e-notice--dismissible[data-notice_id="site_mailer_forms_submissions_notice"] a.e-button--cta').on('click', function () {
+    elementorCommon.ajax.addRequest('elementor_site_mailer_campaign', {
+      data: {
+        source: 'sm-submission-install'
+      }
+    });
+  });
+  document.querySelector('.e-notice--cta.e-notice--dismissible[data-notice_id="send_app_forms_submissions_notice"] a.e-button--cta')?.addEventListener('click', function () {
+    elementorCommon.ajax.addRequest('elementor_send_app_campaign', {
+      data: {
+        source: 'snd-submission-install'
+      }
+    });
+  });
 };
 
 /***/ }),
@@ -1589,9 +1658,9 @@ module.exports = wp.i18n;
   \***********************************************************************/
 /***/ ((module) => {
 
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    "default": obj
+function _interopRequireDefault(e) {
+  return e && e.__esModule ? e : {
+    "default": e
   };
 }
 module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;

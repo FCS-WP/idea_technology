@@ -34,8 +34,10 @@ final class Modules_Manager {
 			'announcements',
 			'display-conditions',
 			'element-manager',
+			'checklist',
 
 			// Modules with Widgets.
+			'attributes',
 			'theme-builder',
 			'loop-builder',
 			'off-canvas',
@@ -75,6 +77,8 @@ final class Modules_Manager {
 			'link-in-bio',
 			'floating-buttons',
 			'search',
+			'cloud-library',
+			'variables',
 		];
 
 		foreach ( $modules as $module_name ) {

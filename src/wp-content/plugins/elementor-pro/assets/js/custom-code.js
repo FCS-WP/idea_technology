@@ -1,4 +1,4 @@
-/*! elementor-pro - v3.23.0 - 23-07-2024 */
+/*! elementor-pro - v3.33.0 - 11-11-2025 */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -225,7 +225,7 @@ class ConditionsProvider extends _baseContext.default {
           options: this.conditionsConfig.getOptions(),
           subOptions: this.conditionsConfig.getSubOptions(condition.name),
           subIdAutocomplete: this.conditionsConfig.getSubIdAutocomplete(condition.sub),
-          supIdOptions: condition.subId ? [{
+          subIdOptions: condition.subId ? [{
             value: condition.subId,
             label: ''
           }] : []
@@ -732,7 +732,7 @@ Object.defineProperty(exports, "__esModule", ({
 exports["default"] = void 0;
 var dataCommands = _interopRequireWildcard(__webpack_require__(/*! ./commands */ "../core/app/modules/site-editor/assets/js/data/commands/index.js"));
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 class Component extends $e.modules.ComponentBase {
   static namespace = 'site-editor';
   getNamespace() {
@@ -746,6 +746,39 @@ exports["default"] = Component;
 
 /***/ }),
 
+/***/ "../core/app/modules/site-editor/assets/js/pages/conditions/condition-button-portal.js":
+/*!*********************************************************************************************!*\
+  !*** ../core/app/modules/site-editor/assets/js/pages/conditions/condition-button-portal.js ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+var _reactDom = __webpack_require__(/*! react-dom */ "react-dom");
+var _react = __webpack_require__(/*! react */ "react");
+var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+const ConditionButtonPortal = props => {
+  const [shouldCreatePortal, setShouldCreatePortal] = (0, _react.useState)(false),
+    portalRoot = document.getElementById('portal-root');
+  (0, _react.useEffect)(() => {
+    setShouldCreatePortal(!!portalRoot);
+  }, [portalRoot]);
+  return shouldCreatePortal ? (0, _reactDom.createPortal)(props.children, portalRoot) : null;
+};
+ConditionButtonPortal.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string])
+};
+var _default = exports["default"] = ConditionButtonPortal;
+
+/***/ }),
+
 /***/ "../core/app/modules/site-editor/assets/js/pages/conditions/condition-conflicts.js":
 /*!*****************************************************************************************!*\
   !*** ../core/app/modules/site-editor/assets/js/pages/conditions/condition-conflicts.js ***!
@@ -753,6 +786,7 @@ exports["default"] = Component;
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
+/* provided dependency */ var sprintf = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n")["sprintf"];
 /* provided dependency */ var __ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n")["__"];
 /* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
 
@@ -779,7 +813,8 @@ function ConditionConflicts(props) {
   return /*#__PURE__*/_react.default.createElement(_appUi.Text, {
     className: "e-site-editor-conditions__conflict",
     variant: "sm"
-  }, __('Elementor recognized that you have set this location for other templates: ', 'elementor-pro'), " ", conflictLinks);
+  }, sprintf(/* Translators: %s: a list of conflicted templates */
+  __('We noticed that you already applied %s with the same condition.', 'elementor-pro'), conflictLinks), /*#__PURE__*/_react.default.createElement("br", null), __("To continue, set different conditions for each so they don't conflict.", 'elementor-pro'));
 }
 ConditionConflicts.propTypes = {
   conflicts: PropTypes.array.isRequired
@@ -1057,6 +1092,7 @@ var _conditionName = _interopRequireDefault(__webpack_require__(/*! ./condition-
 var _conditionSub = _interopRequireDefault(__webpack_require__(/*! ./condition-sub */ "../core/app/modules/site-editor/assets/js/pages/conditions/condition-sub.js"));
 var _conditionSubId = _interopRequireDefault(__webpack_require__(/*! ./condition-sub-id */ "../core/app/modules/site-editor/assets/js/pages/conditions/condition-sub-id.js"));
 var _conditionConflicts = _interopRequireDefault(__webpack_require__(/*! ./condition-conflicts */ "../core/app/modules/site-editor/assets/js/pages/conditions/condition-conflicts.js"));
+var _conditionButtonPortal = _interopRequireDefault(__webpack_require__(/*! ./condition-button-portal */ "../core/app/modules/site-editor/assets/js/pages/conditions/condition-button-portal.js"));
 function ConditionsRows(props) {
   const {
     conditions,
@@ -1092,6 +1128,17 @@ function ConditionsRows(props) {
   })), /*#__PURE__*/_react.default.createElement(_conditionConflicts.default, {
     conflicts: condition.conflictErrors
   })));
+  const SaveButton = () => {
+    return /*#__PURE__*/_react.default.createElement(_appUi.Button, {
+      variant: "contained",
+      color: "primary",
+      size: "lg",
+      hideText: isSaving,
+      icon: isSaving ? 'eicon-loading eicon-animation-spin' : '',
+      text: __('Save & Close', 'elementor-pro'),
+      onClick: () => save().then(props.onAfterSave)
+    });
+  };
   const isSaving = action.current === _conditions.ConditionsProvider.actions.SAVE && action.loading;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, action.error && /*#__PURE__*/_react.default.createElement(_appUi.Dialog, {
     text: action.error,
@@ -1113,18 +1160,11 @@ function ConditionsRows(props) {
     onClick: create
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "e-site-editor-conditions__footer"
-  }, /*#__PURE__*/_react.default.createElement(_appUi.Button, {
-    variant: "contained",
-    color: "primary",
-    size: "lg",
-    hideText: isSaving,
-    icon: isSaving ? 'eicon-loading eicon-animation-spin' : '',
-    text: __('Save & Close', 'elementor-pro'),
-    onClick: () => save().then(props.onAfterSave)
-  })));
+  }, props?.loadPortal ? /*#__PURE__*/_react.default.createElement(_conditionButtonPortal.default, null, /*#__PURE__*/_react.default.createElement(SaveButton, null)) : /*#__PURE__*/_react.default.createElement(SaveButton, null)));
 }
 ConditionsRows.propTypes = {
-  onAfterSave: PropTypes.func
+  onAfterSave: PropTypes.func,
+  loadPortal: PropTypes.bool
 };
 
 /***/ }),
@@ -1150,7 +1190,7 @@ var _appUi = __webpack_require__(/*! @elementor/app-ui */ "@elementor/app-ui");
 var _conditions = _interopRequireDefault(__webpack_require__(/*! ./conditions */ "../modules/custom-code/assets/js/admin/publish-metabox/conditions.js"));
 var _conditionsConfig = _interopRequireDefault(__webpack_require__(/*! elementor-pro-app-modules/site-editor/assets/js/context/services/conditions-config */ "../core/app/modules/site-editor/assets/js/context/services/conditions-config.js"));
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 /**
  * Publish metabox conditions ( 'Edit' modal ).
  */
@@ -1255,7 +1295,7 @@ function ConditionsModal() {
   if (!post || !data.conditions) {
     return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_appUi.Text, {
       tag: "span"
-    }, __('Loading', 'elementor')), /*#__PURE__*/_react.default.createElement(_appUi.Icon, {
+    }, __('Loading', 'elementor-pro')), /*#__PURE__*/_react.default.createElement(_appUi.Icon, {
       className: "spinner"
     }));
   }
@@ -1264,12 +1304,12 @@ function ConditionsModal() {
     className: "post-conditions-display"
   }, /*#__PURE__*/_react.default.createElement("b", null, data.instances + ' ')), /*#__PURE__*/_react.default.createElement(_appUi.Button, {
     onClick: () => setShowModal(true),
-    text: __('Edit', 'elementor'),
+    text: __('Edit', 'elementor-pro'),
     variant: "underlined"
   }), /*#__PURE__*/_react.default.createElement(_appUi.ModalProvider, {
     show: showModal,
     setShow: setShowModal,
-    title: __('Publish Settings', 'elementor'),
+    title: __('Publish Settings', 'elementor-pro'),
     icon: "eps-app__logo eicon-elementor"
   }, /*#__PURE__*/_react.default.createElement(_appUi.CssGrid, {
     columns: 1,
@@ -1337,7 +1377,8 @@ function Conditions(props) {
     currentTemplate: currentTemplateProps,
     onConditionsSaved: onConditionsSaved
   }, /*#__PURE__*/_react.default.createElement(_conditionsRows.default, {
-    onAfterSave: props.onAfterSave
+    onAfterSave: props.onAfterSave,
+    loadPortal: false
   })));
 }
 Conditions.propTypes = {
@@ -2468,6 +2509,17 @@ module.exports = React;
 
 /***/ }),
 
+/***/ "react-dom":
+/*!***************************!*\
+  !*** external "ReactDOM" ***!
+  \***************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = ReactDOM;
+
+/***/ }),
+
 /***/ "elementor-ai-admin":
 /*!**********************************************!*\
   !*** external "__UNSTABLE__elementorAI.App" ***!
@@ -2508,18 +2560,13 @@ module.exports = wp.i18n;
 /***/ ((module) => {
 
 function _extends() {
-  module.exports = _extends = Object.assign ? Object.assign.bind() : function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
+  return module.exports = _extends = Object.assign ? Object.assign.bind() : function (n) {
+    for (var e = 1; e < arguments.length; e++) {
+      var t = arguments[e];
+      for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
     }
-    return target;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  return _extends.apply(this, arguments);
+    return n;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports, _extends.apply(null, arguments);
 }
 module.exports = _extends, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
@@ -2531,9 +2578,9 @@ module.exports = _extends, module.exports.__esModule = true, module.exports["def
   \***********************************************************************/
 /***/ ((module) => {
 
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    "default": obj
+function _interopRequireDefault(e) {
+  return e && e.__esModule ? e : {
+    "default": e
   };
 }
 module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
@@ -2596,7 +2643,7 @@ class CustomCode extends elementorModules.Module {
     $e.components.register(new _component.default());
 
     // eslint-disable-next-line react/no-deprecated
-    ReactDOM.render( /*#__PURE__*/_react.default.createElement(_conditionsModal.default, null), document.querySelector('.post-conditions'));
+    ReactDOM.render(/*#__PURE__*/_react.default.createElement(_conditionsModal.default, null), document.querySelector('.post-conditions'));
     this.addTipsyToFields();
     this.addDescription();
     this.addLocationChangeHandler();
@@ -2629,7 +2676,7 @@ class CustomCode extends elementorModules.Module {
       document.body.append(rootElement);
 
       // eslint-disable-next-line react/no-deprecated
-      ReactDOM.render( /*#__PURE__*/_react.default.createElement(_elementorAiAdmin.default, {
+      ReactDOM.render(/*#__PURE__*/_react.default.createElement(_elementorAiAdmin.default, {
         type: 'code',
         getControlValue: () => document.querySelector('.CodeMirror').CodeMirror.getValue(),
         setControlValue: value => document.querySelector('.CodeMirror').CodeMirror.setValue(value),

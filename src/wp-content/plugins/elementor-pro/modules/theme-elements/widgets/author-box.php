@@ -7,6 +7,7 @@ use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Box_Shadow;
 use Elementor\Group_Control_Typography;
 use Elementor\Utils;
+use ElementorPro\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -35,6 +36,24 @@ class Author_Box extends Base {
 
 	public function get_keywords() {
 		return [ 'author', 'user', 'profile', 'biography', 'testimonial', 'avatar' ];
+	}
+
+	public function has_widget_inner_wrapper(): bool {
+		return ! Plugin::elementor()->experiments->is_feature_active( 'e_optimized_markup' );
+	}
+
+	/**
+	 * Get style dependencies.
+	 *
+	 * Retrieve the list of style dependencies the widget requires.
+	 *
+	 * @since 3.24.0
+	 * @access public
+	 *
+	 * @return array Widget style dependencies.
+	 */
+	public function get_style_depends(): array {
+		return [ 'widget-author-box' ];
 	}
 
 	protected function register_controls() {
@@ -1574,7 +1593,7 @@ class Author_Box extends Base {
 
 				<?php if ( $print_link ) : ?>
 					<a <?php $this->print_render_attribute_string( 'button' ); ?>>
-						<?php $this->print_unescaped_setting( 'link_text' ); ?>
+						<?php echo wp_kses_post( $settings['link_text'] ); ?>
 					</a>
 				<?php endif; ?>
 			</div>

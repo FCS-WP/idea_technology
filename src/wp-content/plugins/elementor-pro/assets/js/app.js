@@ -1,4 +1,4 @@
-/*! elementor-pro - v3.23.0 - 23-07-2024 */
+/*! elementor-pro - v3.33.0 - 11-11-2025 */
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
@@ -1632,7 +1632,7 @@ var React = _react;
 var _appUi = __webpack_require__(/*! @elementor/app-ui */ "@elementor/app-ui");
 var _utils = __webpack_require__(/*! ../utils.js */ "../core/app/assets/js/utils.js");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 const ConnectButton = props => {
   const className = (0, _utils.arrayToClassName)(['e-app-connect-button', props.className]);
   const buttonRef = (0, _react.useRef)(null);
@@ -1660,7 +1660,7 @@ ConnectButton.defaultProps = {
   color: 'cta',
   target: '_blank',
   rel: 'noopener noreferrer',
-  text: __('Connect & Activate', 'elementor')
+  text: __('Connect & Activate', 'elementor-pro')
 };
 var _default = exports["default"] = React.memo(ConnectButton);
 
@@ -1703,6 +1703,2261 @@ const replaceUtmPlaceholders = (link = '', utms = {}) => {
   return link;
 };
 exports.replaceUtmPlaceholders = replaceUtmPlaceholders;
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/components/customization-list-setting-section.js":
+/*!******************************************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/components/customization-list-setting-section.js ***!
+  \******************************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.ListSettingSection = ListSettingSection;
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
+var _i18n = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
+var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
+var _utils = __webpack_require__(/*! elementor-pro-app/utils */ "../core/app/assets/js/utils.js");
+var _upgradeTooltip = __webpack_require__(/*! ./upgrade-tooltip */ "../core/app/modules/import-export-customization/assets/js/components/upgrade-tooltip.js");
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+const DEFAULT_VISIBLE_ITEMS_COUNT = 16;
+function ListSettingSection({
+  items,
+  title,
+  loading,
+  settings,
+  onSettingChange,
+  settingKey,
+  disabled = false,
+  tooltip = false
+}) {
+  const [showMore, setShowMore] = (0, _react.useState)(false);
+  return /*#__PURE__*/_react.default.createElement(_ui.Box, {
+    key: settingKey,
+    sx: {
+      mb: 3,
+      border: 1,
+      borderRadius: 1,
+      borderColor: 'action.focus',
+      p: 2.5
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
+    spacing: 2
+  }, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+    variant: "h6"
+  }, title), /*#__PURE__*/_react.default.createElement(_ui.Grid, {
+    container: true,
+    spacing: 1,
+    alignItems: "start"
+  }, loading ? /*#__PURE__*/_react.default.createElement(_ui.Grid, {
+    item: true,
+    xs: 12,
+    sx: {
+      p: 1,
+      alignItems: 'center',
+      textAlign: 'center'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.CircularProgress, {
+    size: 30
+  })) : /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_ui.Grid, {
+    key: 'all',
+    item: true,
+    xs: 12,
+    sx: {
+      py: 1,
+      px: 0
+    }
+  }, /*#__PURE__*/_react.default.createElement(_upgradeTooltip.UpgradeTooltip, {
+    disabled: disabled && settings.length === items.length,
+    tooltip: tooltip
+  }, /*#__PURE__*/_react.default.createElement(_ui.Box, {
+    sx: {
+      pointerEvents: 'auto',
+      ...(settings.length === items.length && disabled && {
+        cursor: 'pointer'
+      })
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.FormControlLabel, {
+    control: /*#__PURE__*/_react.default.createElement(_ui.Checkbox, {
+      color: "info",
+      checked: settings.length === items.length,
+      indeterminate: settings.length > 0 && settings.length !== items.length,
+      onChange: (e, checked) => {
+        if (checked) {
+          onSettingChange(items.map(({
+            value
+          }) => value), true);
+        } else {
+          onSettingChange([], true);
+        }
+      },
+      sx: {
+        p: 0
+      },
+      disabled: disabled
+    }),
+    sx: {
+      gap: 1,
+      ...(settings.length === items.length && disabled && {
+        cursor: 'pointer'
+      })
+    },
+    slotProps: {
+      typography: {
+        sx: {
+          fontWeight: 500,
+          ...(settings.length === items.length && disabled && {
+            cursor: 'pointer'
+          })
+        }
+      }
+    },
+    label: `${(0, _i18n.__)('All', 'elementor-pro')} ${title.toLowerCase()}`
+  })))), (showMore ? items : items.slice(0, DEFAULT_VISIBLE_ITEMS_COUNT)).map(item => {
+    return /*#__PURE__*/_react.default.createElement(_ui.Grid, {
+      key: item.value,
+      item: true,
+      xs: 3,
+      sx: {
+        py: 1,
+        px: 0
+      }
+    }, /*#__PURE__*/_react.default.createElement(_upgradeTooltip.UpgradeTooltip, {
+      disabled: disabled && settings.includes(item.value),
+      tooltip: tooltip
+    }, /*#__PURE__*/_react.default.createElement(_ui.Box, {
+      sx: {
+        pointerEvents: 'auto',
+        ...(settings.includes(item.value) && disabled && {
+          cursor: 'pointer'
+        })
+      }
+    }, /*#__PURE__*/_react.default.createElement(_ui.FormControlLabel, {
+      control: /*#__PURE__*/_react.default.createElement(_ui.Checkbox, {
+        color: "info",
+        checked: settings.includes(item.value),
+        onChange: (e, checked) => {
+          if (checked) {
+            onSettingChange([...settings, item.value]);
+          } else {
+            onSettingChange(settings.filter(setting => setting !== item.value));
+          }
+        },
+        sx: {
+          p: 0,
+          ...(settings.includes(item.value) && disabled && {
+            cursor: 'pointer'
+          })
+        },
+        disabled: disabled
+      }),
+      sx: {
+        maxWidth: '100%',
+        gap: 1,
+        ...(settings.includes(item.value) && disabled && {
+          cursor: 'pointer'
+        })
+      },
+      slotProps: {
+        typography: {
+          sx: {
+            fontWeight: 400,
+            maxWidth: '100%',
+            overflow: 'hidden',
+            textOverflow: 'ellipsis',
+            whiteSpace: 'nowrap',
+            ...(settings.includes(item.value) && disabled && {
+              cursor: 'pointer'
+            })
+          }
+        }
+      },
+      label: (0, _utils.htmlDecodeTextContent)(item.label)
+    }))));
+  })))), items.length > DEFAULT_VISIBLE_ITEMS_COUNT && /*#__PURE__*/_react.default.createElement(_ui.Button, {
+    variant: "text",
+    color: "info",
+    onClick: () => setShowMore(!showMore)
+  }, showMore ? (0, _i18n.__)('Show less', 'elementor') : (0, _i18n.__)('Show more', 'elementor')));
+}
+ListSettingSection.propTypes = {
+  title: PropTypes.string.isRequired,
+  children: PropTypes.node,
+  loading: PropTypes.bool,
+  disabled: PropTypes.bool,
+  checked: PropTypes.bool,
+  settingKey: PropTypes.string,
+  onSettingChange: PropTypes.func.isRequired,
+  tooltip: PropTypes.bool,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+  })),
+  settings: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string, PropTypes.number]))
+};
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/components/customization-setting-section.js":
+/*!*************************************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/components/customization-setting-section.js ***!
+  \*************************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+/* provided dependency */ var __ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n")["__"];
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.SettingSection = void 0;
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
+var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
+var _upgradeTooltip = __webpack_require__(/*! ./upgrade-tooltip */ "../core/app/modules/import-export-customization/assets/js/components/upgrade-tooltip.js");
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+const SettingSection = ({
+  checked = false,
+  title,
+  description,
+  children,
+  settingKey,
+  onSettingChange,
+  hasToggle = true,
+  disabled = false,
+  notExported = false,
+  tooltip = false
+}) => {
+  const getToggle = () => {
+    if (notExported) {
+      return /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+        "data-testid": `${settingKey}-description`,
+        variant: "body1",
+        color: "text.secondary"
+      }, __('Not exported', 'elementor'));
+    }
+    if (!hasToggle) {
+      return null;
+    }
+    const switchElement = /*#__PURE__*/_react.default.createElement(_ui.Switch, {
+      "data-testid": `${settingKey}-switch`,
+      checked: checked,
+      onChange: (_, isChecked) => onSettingChange && onSettingChange(settingKey, isChecked),
+      color: "info",
+      size: "medium",
+      sx: {
+        alignSelf: 'center',
+        ...(disabled && tooltip && {
+          cursor: 'pointer'
+        })
+      },
+      disabled: disabled
+    });
+    return /*#__PURE__*/_react.default.createElement(_upgradeTooltip.UpgradeTooltip, {
+      disabled: disabled,
+      tooltip: tooltip
+    }, switchElement);
+  };
+  return /*#__PURE__*/_react.default.createElement(_ui.Box, {
+    key: settingKey,
+    sx: {
+      mb: 3,
+      border: 1,
+      borderRadius: 1,
+      borderColor: 'action.focus',
+      p: 2.5
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.Box, {
+    sx: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
+    spacing: 1
+  }, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+    variant: "h6"
+  }, title), description && /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+    "data-testid": `${settingKey}-description`,
+    variant: "body1",
+    color: "text.secondary"
+  }, description)), getToggle()), children && /*#__PURE__*/_react.default.createElement(_ui.Box, {
+    sx: {
+      mt: 1
+    }
+  }, children));
+};
+exports.SettingSection = SettingSection;
+SettingSection.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string,
+  children: PropTypes.node,
+  hasToggle: PropTypes.bool,
+  checked: PropTypes.bool,
+  disabled: PropTypes.bool,
+  settingKey: PropTypes.string,
+  onSettingChange: PropTypes.func,
+  notExported: PropTypes.bool,
+  tooltip: PropTypes.bool
+};
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/components/customization-sub-setting.js":
+/*!*********************************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/components/customization-sub-setting.js ***!
+  \*********************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+/* provided dependency */ var __ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n")["__"];
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.SubSetting = void 0;
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
+var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
+var _upgradeTooltip = __webpack_require__(/*! ./upgrade-tooltip */ "../core/app/modules/import-export-customization/assets/js/components/upgrade-tooltip.js");
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+const SubSetting = ({
+  label,
+  settingKey,
+  onSettingChange,
+  checked = false,
+  disabled = false,
+  notExported = false,
+  tooltip = false
+}) => {
+  const getToggle = () => {
+    if (notExported) {
+      return /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+        "data-testid": `${settingKey}-description`,
+        variant: "body1",
+        color: "text.secondary",
+        sx: {
+          fontWeight: 400,
+          alignSelf: 'center'
+        }
+      }, __('Not exported', 'elementor'));
+    }
+    const switchElement = /*#__PURE__*/_react.default.createElement(_ui.Switch, {
+      "data-testid": `${settingKey}-switch`,
+      checked: checked,
+      disabled: disabled,
+      onChange: (_, isChecked) => onSettingChange && onSettingChange(settingKey, isChecked),
+      color: "info",
+      size: "medium",
+      sx: {
+        alignSelf: 'center',
+        ...(disabled && tooltip && {
+          cursor: 'pointer'
+        })
+      }
+    });
+    return /*#__PURE__*/_react.default.createElement(_upgradeTooltip.UpgradeTooltip, {
+      disabled: disabled,
+      tooltip: tooltip
+    }, switchElement);
+  };
+  return /*#__PURE__*/_react.default.createElement(_ui.Box, {
+    sx: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+    "data-testid": `${settingKey}-label`,
+    variant: "body1"
+  }, label), getToggle());
+};
+exports.SubSetting = SubSetting;
+SubSetting.propTypes = {
+  checked: PropTypes.bool,
+  disabled: PropTypes.bool,
+  notExported: PropTypes.bool,
+  label: PropTypes.string.isRequired,
+  settingKey: PropTypes.string.isRequired,
+  onSettingChange: PropTypes.func,
+  tooltip: PropTypes.bool
+};
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/components/kit-content-customization-dialog.js":
+/*!****************************************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/components/kit-content-customization-dialog.js ***!
+  \****************************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.KitContentCustomizationDialog = KitContentCustomizationDialog;
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
+var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
+var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
+var _i18n = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+var _kitCustomizationDialog = __webpack_require__(/*! ./kit-customization-dialog */ "../core/app/modules/import-export-customization/assets/js/components/kit-customization-dialog.js");
+var _customizationListSettingSection = __webpack_require__(/*! ./customization-list-setting-section */ "../core/app/modules/import-export-customization/assets/js/components/customization-list-setting-section.js");
+var _customizationSettingSection = __webpack_require__(/*! ./customization-setting-section */ "../core/app/modules/import-export-customization/assets/js/components/customization-setting-section.js");
+var _customizationSubSetting = __webpack_require__(/*! ./customization-sub-setting */ "../core/app/modules/import-export-customization/assets/js/components/customization-sub-setting.js");
+var _upgradeNoticeBanner = __webpack_require__(/*! ./upgrade-notice-banner */ "../core/app/modules/import-export-customization/assets/js/components/upgrade-notice-banner.js");
+var _useKitCustomizationPages = __webpack_require__(/*! ../hooks/use-kit-customization-pages */ "../core/app/modules/import-export-customization/assets/js/hooks/use-kit-customization-pages.js");
+var _useKitCustomizationTaxonomies = __webpack_require__(/*! ../hooks/use-kit-customization-taxonomies */ "../core/app/modules/import-export-customization/assets/js/hooks/use-kit-customization-taxonomies.js");
+var _useKitCustomizationCustomPostTypes = __webpack_require__(/*! ../hooks/use-kit-customization-custom-post-types */ "../core/app/modules/import-export-customization/assets/js/hooks/use-kit-customization-custom-post-types.js");
+var _useTier = __webpack_require__(/*! ../hooks/use-tier */ "../core/app/modules/import-export-customization/assets/js/hooks/use-tier.js");
+var _upgradeVersionBanner = __webpack_require__(/*! ./upgrade-version-banner */ "../core/app/modules/import-export-customization/assets/js/components/upgrade-version-banner.js");
+var _analyticsTransformer = __webpack_require__(/*! ../utils/analytics-transformer */ "../core/app/modules/import-export-customization/assets/js/utils/analytics-transformer.js");
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+const MEDIA_FORMAT_OPTIONS = {
+  LINK: 'link',
+  CLOUD: 'cloud'
+};
+const MEDIA_FORMAT_CONFIG = [{
+  value: MEDIA_FORMAT_OPTIONS.LINK,
+  title: (0, _i18n.__)('Link to media', 'elementor-pro'),
+  description: (0, _i18n.__)('Stores only the URLs. The export stays light, but files load only while the original site is online.', 'elementor-pro')
+}, {
+  value: MEDIA_FORMAT_OPTIONS.CLOUD,
+  title: (0, _i18n.__)('Save media to the cloud', 'elementor-pro'),
+  description: (0, _i18n.__)('All images and files are stored with the template. Keeps everything intact, but the file is larger.', 'elementor-pro')
+}];
+const transformAnalyticsData = (payload, pageOptions, taxonomyOptions, customPostTypes) => {
+  const optionsArray = [{
+    key: 'pages',
+    options: pageOptions
+  }, {
+    key: 'taxonomies',
+    options: taxonomyOptions
+  }, {
+    key: 'customPostTypes',
+    options: customPostTypes
+  }];
+  const transformed = {};
+  for (const [key, value] of Object.entries(payload)) {
+    transformed[key] = (0, _analyticsTransformer.transformValueForAnalytics)(key, value, optionsArray);
+  }
+  return transformed;
+};
+function KitContentCustomizationDialog({
+  open,
+  handleClose,
+  handleSaveChanges,
+  data,
+  isImport,
+  isOldExport,
+  isOldElementorVersion,
+  isCloudKitsEligible = false,
+  showMediaFormatValidation = false
+}) {
+  const initialState = data.includes.includes('content');
+  const {
+    isLoading: isPagesLoading,
+    pageOptions,
+    isLoaded: isPagesLoaded
+  } = (0, _useKitCustomizationPages.useKitCustomizationPages)({
+    open,
+    data
+  });
+  const {
+    isLoading: isTaxonomiesLoading,
+    taxonomyOptions,
+    isLoaded: isTaxonomiesLoaded
+  } = (0, _useKitCustomizationTaxonomies.useKitCustomizationTaxonomies)({
+    open,
+    data
+  });
+  const {
+    customPostTypes
+  } = (0, _useKitCustomizationCustomPostTypes.useKitCustomizationCustomPostTypes)({
+    data
+  });
+  const alertRef = (0, _react.useRef)(null);
+  const mediaFormatSectionRef = (0, _react.useRef)(null);
+  const [settings, setSettings] = (0, _react.useState)(() => {
+    if (data.customization.content) {
+      return data.customization.content;
+    }
+    return {
+      pages: [],
+      menus: initialState,
+      taxonomies: [],
+      customPostTypes: [],
+      mediaFormat: MEDIA_FORMAT_OPTIONS.LINK
+    };
+  });
+  (0, _react.useEffect)(() => {
+    if (!open || data.includes.includes('content')) {
+      return;
+    }
+    setSettings({
+      pages: [],
+      menus: false,
+      taxonomies: [],
+      customPostTypes: [],
+      mediaFormat: MEDIA_FORMAT_OPTIONS.LINK
+    });
+  }, [open, data.includes]);
+  (0, _react.useEffect)(() => {
+    if (!open || !data.includes.includes('content')) {
+      return;
+    }
+    setSettings(prevSettings => ({
+      ...prevSettings,
+      pages: isPagesLoaded || isImport ? data.customization.content?.pages || pageOptions.map(({
+        value
+      }) => value) : prevSettings.pages
+    }));
+  }, [open, data.includes, data.customization.content?.pages, isPagesLoaded, isImport, pageOptions]);
+  (0, _react.useEffect)(() => {
+    if (!open || !data.includes.includes('content')) {
+      return;
+    }
+    setSettings(prevSettings => ({
+      ...prevSettings,
+      taxonomies: isTaxonomiesLoaded || isImport ? data.customization.content?.taxonomies || taxonomyOptions.map(({
+        value
+      }) => value) : prevSettings.taxonomies
+    }));
+  }, [open, data.includes, data.customization.content?.taxonomies, isTaxonomiesLoaded, isImport, taxonomyOptions]);
+  (0, _react.useEffect)(() => {
+    if (!open || !data.includes.includes('content')) {
+      return;
+    }
+    setSettings(prevSettings => ({
+      ...prevSettings,
+      customPostTypes: customPostTypes ? data.customization.content?.customPostTypes || customPostTypes.map(({
+        value
+      }) => value) : prevSettings.customPostTypes
+    }));
+  }, [open, data.includes, data.customization.content?.customPostTypes, customPostTypes]);
+  (0, _react.useEffect)(() => {
+    if (!open || !data.includes.includes('content')) {
+      return;
+    }
+    setSettings(prevSettings => ({
+      ...prevSettings,
+      menus: isImport ? data.customization.content?.menus || Object.keys(data?.uploadedData?.manifest['wp-content']?.nav_menu_item || {}).length > 0 : data.customization.content?.menus ?? initialState
+    }));
+  }, [open, data.includes, data.customization.content?.menus, data.uploadedData?.manifest, isImport]);
+  (0, _react.useEffect)(() => {
+    if (!open || !data.includes.includes('content')) {
+      return;
+    }
+    setSettings(prevSettings => ({
+      ...prevSettings,
+      mediaFormat: data.customization.content?.mediaFormat || MEDIA_FORMAT_OPTIONS.LINK
+    }));
+  }, [open, data.includes, data.customization.content?.mediaFormat]);
+  (0, _react.useEffect)(() => {
+    if (open) {
+      window.elementorModules?.appsEventTracking?.AppsEventTracking?.sendPageViewsWebsiteTemplates(elementorCommon.eventsManager.config.secondaryLocations.kitLibrary.kitExportCustomizationEdit);
+    }
+  }, [open]);
+  (0, _react.useEffect)(() => {
+    if (showMediaFormatValidation) {
+      setTimeout(() => {
+        const targetElement = alertRef.current || mediaFormatSectionRef.current;
+        if (targetElement) {
+          targetElement.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          });
+        }
+      });
+    }
+  }, [showMediaFormatValidation]);
+  const handleSettingsChange = (settingKey, payload) => {
+    setSettings(prev => ({
+      ...prev,
+      [settingKey]: payload
+    }));
+  };
+  const isTaxonomiesExported = () => {
+    return isImport && taxonomyOptions?.length > 0;
+  };
+  const isPagesExported = () => {
+    const content = data?.uploadedData?.manifest?.content;
+    const wpContent = data?.uploadedData?.manifest?.['wp-content'];
+    const isSomeContentExported = Object.keys(content?.page || {})?.length;
+    const isSomeWPContentExported = Object.keys(wpContent?.page || {})?.length;
+    return Boolean(isSomeContentExported || isSomeWPContentExported);
+  };
+  const isMenusExported = () => {
+    return Object.keys(data?.uploadedData?.manifest?.['wp-content']?.nav_menu_item || {}).length > 0 || customPostTypes?.find(cpt => cpt.value.includes('nav_menu'));
+  };
+  const isCustomPostTypesExported = () => {
+    return isImport && customPostTypes?.length > 0;
+  };
+  const renderPagesSection = () => {
+    if (isImport && isOldExport) {
+      return null;
+    }
+    return isImport && !isPagesExported() ? /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
+      title: (0, _i18n.__)('Site pages', 'elementor-pro'),
+      settingKey: "pages",
+      notExported: true
+    }) : /*#__PURE__*/_react.default.createElement(_customizationListSettingSection.ListSettingSection, {
+      settingKey: "pages",
+      title: (0, _i18n.__)('Site pages', 'elementor-pro'),
+      onSettingChange: selectedPages => {
+        handleSettingsChange('pages', selectedPages);
+      },
+      settings: settings.pages,
+      items: pageOptions,
+      loading: isPagesLoading,
+      disabled: !(0, _useTier.isHighTier)(),
+      tooltip: !(0, _useTier.isHighTier)()
+    });
+  };
+  const renderMenusSection = () => {
+    if (isImport && isOldExport) {
+      return null;
+    }
+    return /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
+      checked: settings.menus,
+      disabled: isImport && !isMenusExported() || !(0, _useTier.isHighTier)(),
+      title: (0, _i18n.__)('Menus', 'elementor-pro'),
+      settingKey: "menus",
+      tooltip: !(0, _useTier.isHighTier)(),
+      onSettingChange: (key, isChecked) => {
+        handleSettingsChange(key, isChecked);
+      }
+    });
+  };
+  const renderMediaFormatSection = () => {
+    if (isImport) {
+      return /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
+        title: (0, _i18n.__)('Media format', 'elementor-pro'),
+        settingKey: "mediaFormat",
+        hasToggle: false
+      }, /*#__PURE__*/_react.default.createElement(_ui.Alert, {
+        icon: /*#__PURE__*/_react.default.createElement(_ui.SvgIcon, {
+          color: "info",
+          viewBox: "0 0 24 24"
+        }, /*#__PURE__*/_react.default.createElement("path", {
+          d: "M11.8623 14.7549C12.3665 14.8061 12.7598 15.2322 12.7598 15.75C12.7598 16.2678 12.3665 16.6939 11.8623 16.7451L11.7598 16.75H11.75C11.1977 16.75 10.75 16.3023 10.75 15.75C10.75 15.1977 11.1977 14.75 11.75 14.75H11.7598L11.8623 14.7549Z",
+          fill: "currentColor"
+        }), /*#__PURE__*/_react.default.createElement("path", {
+          d: "M11.75 7C12.1642 7 12.5 7.33579 12.5 7.75V12.75C12.5 13.1642 12.1642 13.5 11.75 13.5C11.3358 13.5 11 13.1642 11 12.75V7.75C11 7.33579 11.3358 7 11.75 7Z",
+          fill: "currentColor"
+        }), /*#__PURE__*/_react.default.createElement("path", {
+          fillRule: "evenodd",
+          clipRule: "evenodd",
+          d: "M11.75 2C17.1348 2 21.5 6.36522 21.5 11.75C21.5 17.1348 17.1348 21.5 11.75 21.5C6.36522 21.5 2 17.1348 2 11.75C2 6.36522 6.36522 2 11.75 2ZM11.75 3.5C7.19365 3.5 3.5 7.19365 3.5 11.75C3.5 16.3063 7.19365 20 11.75 20C16.3063 20 20 16.3063 20 11.75C20 7.19365 16.3063 3.5 11.75 3.5Z",
+          fill: "currentColor"
+        })),
+        sx: {
+          backgroundColor: 'transparent',
+          p: 0
+        }
+      }, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+        variant: "body2",
+        color: "text.primary"
+      }, /*#__PURE__*/_react.default.createElement("strong", null, (0, _i18n.__)('Note:', 'elementor-pro')), " ", (0, _i18n.__)('The media will be uploaded automatically, just as it was saved during export', 'elementor-pro'))));
+    }
+    if (!isImport && !isCloudKitsEligible) {
+      return null;
+    }
+    return /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
+      ref: mediaFormatSectionRef,
+      description: (0, _i18n.__)('Select how do you want to save & export the media files.', 'elementor-pro'),
+      title: (0, _i18n.__)('Media format', 'elementor-pro'),
+      settingKey: "mediaFormat",
+      hasToggle: false,
+      disabled: !(0, _useTier.isHighTier)(),
+      tooltip: !(0, _useTier.isHighTier)()
+    }, /*#__PURE__*/_react.default.createElement(_ui.Box, {
+      sx: {
+        pt: 2.5
+      }
+    }, /*#__PURE__*/_react.default.createElement(_ui.FormControl, {
+      component: "fieldset",
+      disabled: !(0, _useTier.isHighTier)(),
+      sx: {
+        width: '100%'
+      }
+    }, /*#__PURE__*/_react.default.createElement(_ui.RadioGroup, {
+      value: settings.mediaFormat,
+      onChange: event => {
+        handleSettingsChange('mediaFormat', event.target.value);
+      },
+      sx: {
+        width: '100%'
+      }
+    }, MEDIA_FORMAT_CONFIG.map((option, index) => /*#__PURE__*/_react.default.createElement(_ui.Box, {
+      key: option.value,
+      sx: {
+        border: 1,
+        borderColor: settings.mediaFormat === option.value ? 'info.light' : 'divider',
+        borderRadius: 2,
+        p: 1,
+        mb: index < MEDIA_FORMAT_CONFIG.length - 1 ? 1.5 : 0,
+        width: '100%'
+      }
+    }, /*#__PURE__*/_react.default.createElement(_ui.FormControlLabel, {
+      value: option.value,
+      control: /*#__PURE__*/_react.default.createElement(_ui.Radio, {
+        color: "info",
+        "data-testid": `media-format-${option.value}`
+      }),
+      label: /*#__PURE__*/_react.default.createElement(_ui.Box, null, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+        variant: "body2",
+        sx: {
+          mb: 0.25
+        }
+      }, option.title), /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+        variant: "body2",
+        color: "text.secondary"
+      }, option.description)),
+      sx: {
+        alignItems: 'flex-start',
+        m: 0,
+        width: '100%'
+      }
+    }))))), showMediaFormatValidation && /*#__PURE__*/_react.default.createElement(_ui.Alert, {
+      ref: alertRef,
+      icon: /*#__PURE__*/_react.default.createElement(_ui.SvgIcon, {
+        color: "error",
+        viewBox: "0 0 24 24"
+      }, /*#__PURE__*/_react.default.createElement("path", {
+        d: "M11.8623 14.7549C12.3665 14.8061 12.7598 15.2322 12.7598 15.75C12.7598 16.2678 12.3665 16.6939 11.8623 16.7451L11.7598 16.75H11.75C11.1977 16.75 10.75 16.3023 10.75 15.75C10.75 15.1977 11.1977 14.75 11.75 14.75H11.7598L11.8623 14.7549Z",
+        fill: "currentColor"
+      }), /*#__PURE__*/_react.default.createElement("path", {
+        d: "M11.75 7C12.1642 7 12.5 7.33579 12.5 7.75V12.75C12.5 13.1642 12.1642 13.5 11.75 13.5C11.3358 13.5 11 13.1642 11 12.75V7.75C11 7.33579 11.3358 7 11.75 7Z",
+        fill: "currentColor"
+      }), /*#__PURE__*/_react.default.createElement("path", {
+        fillRule: "evenodd",
+        clipRule: "evenodd",
+        d: "M11.75 2C17.1348 2 21.5 6.36522 21.5 11.75C21.5 17.1348 17.1348 21.5 11.75 21.5C6.36522 21.5 2 17.1348 2 11.75C2 6.36522 6.36522 2 11.75 2ZM11.75 3.5C7.19365 3.5 3.5 7.19365 3.5 11.75C3.5 16.3063 7.19365 20 11.75 20C16.3063 20 20 16.3063 20 11.75C20 7.19365 16.3063 3.5 11.75 3.5Z",
+        fill: "currentColor"
+      })),
+      sx: {
+        mt: 2,
+        ml: 1,
+        backgroundColor: 'transparent',
+        p: 0
+      }
+    }, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+      variant: "body2",
+      color: "text.primary"
+    }, /*#__PURE__*/_react.default.createElement("strong", null, (0, _i18n.__)('Note:', 'elementor-pro')), " ", (0, _i18n.__)('To export a ZIP, go to Edit Content, choose \'Link to Media\', then Export as ZIP.', 'elementor-pro'), /*#__PURE__*/_react.default.createElement("br", null), (0, _i18n.__)('Or, save this template to the cloud instead.', 'elementor-pro')))));
+  };
+  const renderTaxonomiesSection = () => {
+    if (isImport && isOldExport) {
+      return null;
+    }
+    return /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
+      description: (0, _i18n.__)('Group your content by type, topic, or any structure you choose.', 'elementor-pro'),
+      title: (0, _i18n.__)('Taxonomies', 'elementor-pro'),
+      settingKey: "taxonomies",
+      notExported: isImport && !isTaxonomiesExported(),
+      hasToggle: false
+    }, isTaxonomiesLoading ? /*#__PURE__*/_react.default.createElement(_ui.Box, {
+      sx: {
+        p: 1,
+        alignItems: 'center',
+        textAlign: 'center'
+      }
+    }, /*#__PURE__*/_react.default.createElement(_ui.CircularProgress, {
+      size: 30
+    })) : taxonomyOptions.map(taxonomy => {
+      return /*#__PURE__*/_react.default.createElement(_customizationSubSetting.SubSetting, {
+        key: taxonomy.value,
+        label: taxonomy.label,
+        settingKey: "taxonomies",
+        checked: settings.taxonomies.includes(taxonomy.value),
+        disabled: !(0, _useTier.isHighTier)(),
+        tooltip: !(0, _useTier.isHighTier)(),
+        onSettingChange: (key, isChecked) => {
+          setSettings(prevState => {
+            const selectedTaxonomies = isChecked ? [...prevState.taxonomies, taxonomy.value] : prevState.taxonomies.filter(value => value !== taxonomy.value);
+            return {
+              ...prevState,
+              taxonomies: selectedTaxonomies
+            };
+          });
+        }
+      });
+    }));
+  };
+  return /*#__PURE__*/_react.default.createElement(_kitCustomizationDialog.KitCustomizationDialog, {
+    open: open,
+    title: (0, _i18n.__)('Edit content', 'elementor-pro'),
+    handleClose: handleClose,
+    handleSaveChanges: () => {
+      const hasEnabledCustomization = settings.pages.length > 0 || settings.menus || settings.customPostTypes.length > 0 || settings.taxonomies.length > 0 || settings.mediaFormat !== MEDIA_FORMAT_OPTIONS.LINK;
+      const transformedAnalytics = transformAnalyticsData(settings, pageOptions, taxonomyOptions, customPostTypes);
+      handleSaveChanges('content', settings, hasEnabledCustomization, transformedAnalytics);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
+    sx: {
+      position: 'relative'
+    },
+    gap: 2
+  }, isOldElementorVersion && /*#__PURE__*/_react.default.createElement(_upgradeVersionBanner.UpgradeVersionBanner, null), /*#__PURE__*/_react.default.createElement(_ui.Stack, null, renderPagesSection(), isImport && !isCustomPostTypesExported() ? /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
+    title: (0, _i18n.__)('Custom post types', 'elementor-pro'),
+    settingKey: "customPostTypes",
+    notExported: true
+  }) : /*#__PURE__*/_react.default.createElement(_customizationListSettingSection.ListSettingSection, {
+    settingKey: "customPostTypes",
+    title: (0, _i18n.__)('Custom post types', 'elementor-pro'),
+    onSettingChange: selectedCustomPostTypes => {
+      handleSettingsChange('customPostTypes', selectedCustomPostTypes);
+    },
+    settings: settings.customPostTypes,
+    items: customPostTypes,
+    disabled: isImport && undefined === data?.uploadedData?.manifest['custom-post-type-title'] || !(0, _useTier.isHighTier)(),
+    tooltip: !(0, _useTier.isHighTier)()
+  }), renderMediaFormatSection(), renderMenusSection(), renderTaxonomiesSection()), /*#__PURE__*/_react.default.createElement(_upgradeNoticeBanner.UpgradeNoticeBanner, null)));
+}
+KitContentCustomizationDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  isImport: PropTypes.bool,
+  isOldExport: PropTypes.bool,
+  isOldElementorVersion: PropTypes.bool,
+  handleClose: PropTypes.func.isRequired,
+  handleSaveChanges: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
+  isCloudKitsEligible: PropTypes.bool,
+  showMediaFormatValidation: PropTypes.bool
+};
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/components/kit-customization-dialog.js":
+/*!********************************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/components/kit-customization-dialog.js ***!
+  \********************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.KitCustomizationDialog = KitCustomizationDialog;
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
+var _i18n = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function KitCustomizationDialog({
+  open,
+  title,
+  handleClose,
+  handleSaveChanges,
+  children,
+  saveDisabled = false
+}) {
+  return /*#__PURE__*/_react.default.createElement(_ui.Dialog, {
+    open: open,
+    onClose: handleClose,
+    maxWidth: "md",
+    fullWidth: true
+  }, /*#__PURE__*/_react.default.createElement(_ui.DialogHeader, {
+    onClose: handleClose
+  }, /*#__PURE__*/_react.default.createElement(_ui.DialogTitle, null, title)), /*#__PURE__*/_react.default.createElement(_ui.DialogContent, {
+    dividers: true,
+    sx: {
+      pt: 3,
+      px: 3,
+      pb: 0
+    }
+  }, children), /*#__PURE__*/_react.default.createElement(_ui.DialogActions, null, /*#__PURE__*/_react.default.createElement(_ui.Button, {
+    onClick: handleClose,
+    color: "secondary"
+  }, (0, _i18n.__)('Cancel', 'elementor')), /*#__PURE__*/_react.default.createElement(_ui.Button, {
+    disabled: saveDisabled,
+    onClick: () => {
+      handleSaveChanges();
+      handleClose();
+    },
+    variant: "contained",
+    color: "primary"
+  }, (0, _i18n.__)('Save changes', 'elementor'))));
+}
+KitCustomizationDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  handleSaveChanges: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
+  title: PropTypes.string.isRequired,
+  saveDisabled: PropTypes.bool
+};
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/components/kit-settings-customization-dialog.js":
+/*!*****************************************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/components/kit-settings-customization-dialog.js ***!
+  \*****************************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.KitSettingsCustomizationDialog = KitSettingsCustomizationDialog;
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
+var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
+var _i18n = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
+var _customizationSettingSection = __webpack_require__(/*! ./customization-setting-section */ "../core/app/modules/import-export-customization/assets/js/components/customization-setting-section.js");
+var _customizationSubSetting = __webpack_require__(/*! ./customization-sub-setting */ "../core/app/modules/import-export-customization/assets/js/components/customization-sub-setting.js");
+var _kitCustomizationDialog = __webpack_require__(/*! ./kit-customization-dialog */ "../core/app/modules/import-export-customization/assets/js/components/kit-customization-dialog.js");
+var _upgradeNoticeBanner = __webpack_require__(/*! ./upgrade-notice-banner */ "../core/app/modules/import-export-customization/assets/js/components/upgrade-notice-banner.js");
+var _useTier = __webpack_require__(/*! ../hooks/use-tier */ "../core/app/modules/import-export-customization/assets/js/hooks/use-tier.js");
+var _upgradeVersionBanner = __webpack_require__(/*! ./upgrade-version-banner */ "../core/app/modules/import-export-customization/assets/js/components/upgrade-version-banner.js");
+var _analyticsTransformer = __webpack_require__(/*! ../utils/analytics-transformer */ "../core/app/modules/import-export-customization/assets/js/utils/analytics-transformer.js");
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+const transformAnalyticsData = payload => {
+  const transformed = {};
+  for (const [key, value] of Object.entries(payload)) {
+    transformed[key] = (0, _analyticsTransformer.transformValueForAnalytics)(key, value, []);
+  }
+  return transformed;
+};
+function KitSettingsCustomizationDialog({
+  open,
+  handleClose,
+  handleSaveChanges,
+  data,
+  isImport,
+  isOldExport,
+  isOldElementorVersion
+}) {
+  const getState = (0, _react.useCallback)(initialState => {
+    if (!data.includes.includes('settings')) {
+      return {
+        theme: initialState,
+        globalColors: initialState,
+        globalFonts: initialState,
+        themeStyleSettings: initialState,
+        generalSettings: initialState,
+        experiments: initialState,
+        customFonts: initialState,
+        customIcons: initialState,
+        customCode: initialState
+      };
+    }
+    if (isImport) {
+      const manifestData = data?.uploadedData?.manifest?.['site-settings'];
+      let themeState = false;
+      if (isOldExport) {
+        themeState = !initialState ? false : data?.uploadedData?.manifest?.theme;
+      } else {
+        themeState = manifestData?.theme ?? initialState;
+      }
+      return {
+        theme: themeState,
+        globalColors: isOldExport ? true : manifestData?.globalColors ?? initialState,
+        globalFonts: isOldExport ? true : manifestData?.globalFonts ?? initialState,
+        themeStyleSettings: isOldExport ? true : manifestData?.themeStyleSettings ?? initialState,
+        generalSettings: isOldExport ? true : manifestData?.generalSettings ?? initialState,
+        experiments: isOldExport ? true : manifestData?.experiments ?? initialState,
+        customFonts: isOldExport ? true : manifestData?.customFonts ?? initialState,
+        customIcons: isOldExport ? true : manifestData?.customIcons ?? initialState,
+        customCode: isOldExport ? true : manifestData?.customCode ?? initialState
+      };
+    }
+    const customization = data?.customization?.settings;
+    return {
+      theme: customization?.theme ?? initialState,
+      globalColors: customization?.globalColors ?? initialState,
+      globalFonts: customization?.globalFonts ?? initialState,
+      themeStyleSettings: customization?.themeStyleSettings ?? initialState,
+      generalSettings: customization?.generalSettings ?? initialState,
+      experiments: customization?.experiments ?? initialState,
+      customFonts: customization?.customFonts ?? initialState,
+      customIcons: customization?.customIcons ?? initialState,
+      customCode: customization?.customCode ?? initialState
+    };
+  }, [data.includes, data?.uploadedData?.manifest, data?.customization?.settings, isImport, isOldExport]);
+  const initialState = data.includes.includes('settings');
+  const [settings, setSettings] = (0, _react.useState)(() => {
+    if (data.customization.settings) {
+      return data.customization.settings;
+    }
+    return getState(initialState);
+  });
+  (0, _react.useEffect)(() => {
+    if (open) {
+      if (data.customization.settings) {
+        setSettings(data.customization.settings);
+      } else {
+        const state = getState(initialState);
+        setSettings(state);
+      }
+    }
+  }, [open, data.customization.settings, data?.uploadedData, initialState, getState]);
+  (0, _react.useEffect)(() => {
+    if (open) {
+      window.elementorModules?.appsEventTracking?.AppsEventTracking?.sendPageViewsWebsiteTemplates(elementorCommon.eventsManager.config.secondaryLocations.kitLibrary.kitExportCustomizationEdit);
+    }
+  }, [open]);
+  const handleToggleChange = settingKey => {
+    setSettings(prev => ({
+      ...prev,
+      [settingKey]: !prev[settingKey]
+    }));
+  };
+  return /*#__PURE__*/_react.default.createElement(_kitCustomizationDialog.KitCustomizationDialog, {
+    open: open,
+    title: (0, _i18n.__)('Edit settings & configurations', 'elementor'),
+    handleClose: handleClose,
+    handleSaveChanges: () => {
+      const hasEnabledCustomization = settings.theme || settings.globalColors || settings.globalFonts || settings.themeStyleSettings || settings.generalSettings || settings.experiments || settings.customFonts || settings.customIcons || settings.customCode;
+      const transformedAnalytics = transformAnalyticsData(settings);
+      handleSaveChanges('settings', settings, hasEnabledCustomization, transformedAnalytics);
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
+    sx: {
+      position: 'relative'
+    },
+    gap: 2
+  }, isOldElementorVersion && /*#__PURE__*/_react.default.createElement(_upgradeVersionBanner.UpgradeVersionBanner, null), /*#__PURE__*/_react.default.createElement(_ui.Stack, null, /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
+    checked: settings.theme,
+    title: (0, _i18n.__)('Theme', 'elementor'),
+    description: (0, _i18n.__)('Only public WordPress themes are supported', 'elementor'),
+    settingKey: "theme",
+    onSettingChange: handleToggleChange,
+    notExported: isImport && !data?.uploadedData?.manifest.theme
+  }), !isOldExport && /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
+    title: (0, _i18n.__)('Site settings', 'elementor'),
+    hasToggle: false
+  }, /*#__PURE__*/_react.default.createElement(_ui.Stack, null, /*#__PURE__*/_react.default.createElement(_customizationSubSetting.SubSetting, {
+    label: (0, _i18n.__)('Global colors', 'elementor'),
+    settingKey: "globalColors",
+    onSettingChange: handleToggleChange,
+    checked: settings.globalColors,
+    disabled: isImport && !data?.uploadedData?.manifest?.['site-settings']?.globalColors || !(0, _useTier.isHighTier)(),
+    tooltip: !(0, _useTier.isHighTier)()
+  }), /*#__PURE__*/_react.default.createElement(_customizationSubSetting.SubSetting, {
+    label: (0, _i18n.__)('Global fonts', 'elementor'),
+    settingKey: "globalFonts",
+    onSettingChange: handleToggleChange,
+    checked: settings.globalFonts,
+    disabled: isImport && !data?.uploadedData?.manifest?.['site-settings']?.globalFonts || !(0, _useTier.isHighTier)(),
+    tooltip: !(0, _useTier.isHighTier)()
+  }), /*#__PURE__*/_react.default.createElement(_customizationSubSetting.SubSetting, {
+    label: (0, _i18n.__)('Theme style settings', 'elementor'),
+    settingKey: "themeStyleSettings",
+    onSettingChange: handleToggleChange,
+    checked: settings.themeStyleSettings,
+    disabled: isImport && !data?.uploadedData?.manifest?.['site-settings']?.themeStyleSettings || !(0, _useTier.isHighTier)(),
+    tooltip: !(0, _useTier.isHighTier)()
+  }))), /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
+    checked: settings.generalSettings,
+    title: (0, _i18n.__)('Settings', 'elementor'),
+    description: (0, _i18n.__)('Include site identity, background, layout, Lightbox, page transitions, and custom CSS', 'elementor'),
+    settingKey: "generalSettings",
+    onSettingChange: handleToggleChange,
+    disabled: isImport && !data?.uploadedData?.manifest?.['site-settings']?.generalSettings || !(0, _useTier.isHighTier)(),
+    tooltip: !(0, _useTier.isHighTier)()
+  }), /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
+    checked: settings.experiments,
+    title: (0, _i18n.__)('Experiments', 'elementor'),
+    description: (0, _i18n.__)('This will apply all experiments that are still active during import', 'elementor'),
+    settingKey: "experiments",
+    onSettingChange: handleToggleChange,
+    disabled: isImport && !data?.uploadedData?.manifest?.experiments || !(0, _useTier.isHighTier)(),
+    tooltip: !(0, _useTier.isHighTier)()
+  }), /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
+    title: (0, _i18n.__)('Custom files', 'elementor'),
+    hasToggle: false
+  }, /*#__PURE__*/_react.default.createElement(_ui.Stack, null, /*#__PURE__*/_react.default.createElement(_customizationSubSetting.SubSetting, {
+    label: (0, _i18n.__)('Custom fonts', 'elementor'),
+    settingKey: "customFonts",
+    onSettingChange: handleToggleChange,
+    checked: settings.customFonts,
+    disabled: isImport && !data?.uploadedData?.manifest?.['custom-fonts'] || !(0, _useTier.isHighTier)(),
+    tooltip: !(0, _useTier.isHighTier)()
+  }), /*#__PURE__*/_react.default.createElement(_customizationSubSetting.SubSetting, {
+    label: (0, _i18n.__)('Custom icons', 'elementor'),
+    settingKey: "customIcons",
+    onSettingChange: handleToggleChange,
+    checked: settings.customIcons,
+    disabled: isImport && !data?.uploadedData?.manifest?.['custom-icons'] || !(0, _useTier.isHighTier)(),
+    tooltip: !(0, _useTier.isHighTier)()
+  }), /*#__PURE__*/_react.default.createElement(_customizationSubSetting.SubSetting, {
+    label: (0, _i18n.__)('Custom code', 'elementor'),
+    settingKey: "customCode",
+    onSettingChange: handleToggleChange,
+    checked: settings.customCode,
+    disabled: isImport && !data?.uploadedData?.manifest?.['custom-code'] || !(0, _useTier.isHighTier)(),
+    tooltip: !(0, _useTier.isHighTier)()
+  }))))), /*#__PURE__*/_react.default.createElement(_upgradeNoticeBanner.UpgradeNoticeBanner, null)));
+}
+KitSettingsCustomizationDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  isImport: PropTypes.bool,
+  isOldExport: PropTypes.bool,
+  isOldElementorVersion: PropTypes.bool,
+  handleClose: PropTypes.func.isRequired,
+  handleSaveChanges: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired
+};
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/components/kit-templates-customization-dialog.js":
+/*!******************************************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/components/kit-templates-customization-dialog.js ***!
+  \******************************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.KitTemplatesCustomizationDialog = KitTemplatesCustomizationDialog;
+exports.hasTemplatesForExportGroup = void 0;
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
+var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
+var _i18n = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
+var _customizationSettingSection = __webpack_require__(/*! ./customization-setting-section */ "../core/app/modules/import-export-customization/assets/js/components/customization-setting-section.js");
+var _kitCustomizationDialog = __webpack_require__(/*! ./kit-customization-dialog */ "../core/app/modules/import-export-customization/assets/js/components/kit-customization-dialog.js");
+var _upgradeNoticeBanner = __webpack_require__(/*! ./upgrade-notice-banner */ "../core/app/modules/import-export-customization/assets/js/components/upgrade-notice-banner.js");
+var _useTier = __webpack_require__(/*! ../hooks/use-tier */ "../core/app/modules/import-export-customization/assets/js/hooks/use-tier.js");
+var _themeBuilderCustomization = __webpack_require__(/*! ./theme-builder-customization */ "../core/app/modules/import-export-customization/assets/js/components/theme-builder-customization.js");
+var _upgradeVersionBanner = __webpack_require__(/*! ./upgrade-version-banner */ "../core/app/modules/import-export-customization/assets/js/components/upgrade-version-banner.js");
+var _analyticsTransformer = __webpack_require__(/*! ../utils/analytics-transformer */ "../core/app/modules/import-export-customization/assets/js/utils/analytics-transformer.js");
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+const transformAnalyticsData = payload => {
+  const transformed = {};
+  for (const [key, value] of Object.entries(payload)) {
+    transformed[key] = (0, _analyticsTransformer.transformValueForAnalytics)(key, value, []);
+  }
+  return transformed;
+};
+const hasTemplatesForExportGroup = (exportGroup, manifest) => {
+  if (!manifest?.templates) {
+    return false;
+  }
+  const exportGroups = elementorAppConfig?.['import-export-customization']?.exportGroups || {};
+  return Object.values(manifest.templates).some(template => {
+    if (!template || typeof template !== 'object' || !template.doc_type) {
+      return false;
+    }
+    const templateExportGroup = exportGroups[template.doc_type];
+    return templateExportGroup === exportGroup;
+  });
+};
+exports.hasTemplatesForExportGroup = hasTemplatesForExportGroup;
+function KitTemplatesCustomizationDialog({
+  open,
+  handleClose,
+  handleSaveChanges,
+  data,
+  isImport,
+  isOldExport,
+  isOldElementorVersion
+}) {
+  const initialState = data.includes.includes('templates');
+  const getState = (0, _react.useCallback)(parentInitialState => {
+    if (!data.includes.includes('templates')) {
+      return {
+        siteTemplates: {
+          enabled: parentInitialState
+        },
+        themeBuilder: {
+          enabled: parentInitialState
+        },
+        globalWidgets: {
+          enabled: parentInitialState
+        }
+      };
+    }
+    if (isImport) {
+      return {
+        siteTemplates: {
+          enabled: isImport && isOldExport ? true : hasTemplatesForExportGroup('site-templates', data?.uploadedData?.manifest) ?? parentInitialState
+        },
+        themeBuilder: {
+          enabled: isImport && isOldExport ? true : hasTemplatesForExportGroup('theme-builder', data?.uploadedData?.manifest) ?? parentInitialState
+        },
+        globalWidgets: {
+          enabled: isImport && isOldExport ? true : hasTemplatesForExportGroup('global-widget', data?.uploadedData?.manifest) ?? parentInitialState
+        }
+      };
+    }
+    return {
+      siteTemplates: {
+        enabled: data?.customization?.templates?.siteTemplates?.enabled ?? parentInitialState
+      },
+      themeBuilder: {
+        enabled: data?.customization?.templates?.themeBuilder?.enabled ?? parentInitialState
+      },
+      globalWidgets: {
+        enabled: data?.customization?.templates?.globalWidgets?.enabled ?? parentInitialState
+      }
+    };
+  }, [data.includes, data?.uploadedData?.manifest, data?.customization?.templates, isImport, isOldExport]);
+  const [templates, setTemplates] = (0, _react.useState)({});
+  (0, _react.useEffect)(() => {
+    if (open) {
+      if (data.customization.templates) {
+        setTemplates(data.customization.templates);
+      } else {
+        const state = getState(initialState);
+        setTemplates(state);
+      }
+    }
+  }, [open, data.customization.templates, data?.uploadedData, initialState, getState]);
+  (0, _react.useEffect)(() => {
+    if (open) {
+      elementorModules?.appsEventTracking?.AppsEventTracking?.sendPageViewsWebsiteTemplates(elementorCommon.eventsManager.config.secondaryLocations.kitLibrary.kitExportCustomizationEdit);
+    }
+  }, [open]);
+  const handleToggleChange = (settingKey, isChecked) => {
+    setTemplates(prev => ({
+      ...prev,
+      [settingKey]: {
+        ...prev[settingKey],
+        enabled: isChecked
+      }
+    }));
+  };
+  return /*#__PURE__*/_react.default.createElement(_kitCustomizationDialog.KitCustomizationDialog, {
+    open: open,
+    title: (0, _i18n.__)('Edit templates', 'elementor'),
+    handleClose: handleClose,
+    handleSaveChanges: () => {
+      const hasEnabledCustomization = templates.siteTemplates?.enabled || templates.themeBuilder?.enabled || templates.globalWidgets?.enabled;
+      const transformedAnalytics = transformAnalyticsData(templates);
+      handleSaveChanges('templates', templates, hasEnabledCustomization, transformedAnalytics);
+    },
+    minHeight: "auto"
+  }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
+    sx: {
+      position: 'relative'
+    },
+    gap: 2
+  }, isOldElementorVersion && /*#__PURE__*/_react.default.createElement(_upgradeVersionBanner.UpgradeVersionBanner, null), /*#__PURE__*/_react.default.createElement(_ui.Stack, null, !isOldExport && /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
+    checked: templates.siteTemplates?.enabled || false,
+    title: (0, _i18n.__)('Site Templates', 'elementor'),
+    settingKey: "siteTemplates",
+    onSettingChange: handleToggleChange,
+    disabled: !(0, _useTier.isHighTier)() || isImport && !hasTemplatesForExportGroup('site-templates', data?.uploadedData?.manifest),
+    tooltip: !(0, _useTier.isHighTier)()
+  }), /*#__PURE__*/_react.default.createElement(_themeBuilderCustomization.ThemeBuilderCustomization, {
+    state: templates.themeBuilder,
+    settingKey: "themeBuilder",
+    onStateChange: (key, newState, mergeMode = false) => {
+      setTemplates(prev => {
+        if (mergeMode) {
+          return {
+            ...prev,
+            [key]: {
+              ...prev[key],
+              ...newState
+            }
+          };
+        }
+        return {
+          ...prev,
+          [key]: newState
+        };
+      });
+    },
+    data: data,
+    disabled: !(0, _useTier.isHighTier)() || isImport && !hasTemplatesForExportGroup('theme-builder', data?.uploadedData?.manifest),
+    tooltip: !(0, _useTier.isHighTier)()
+  }), !isOldExport && /*#__PURE__*/_react.default.createElement(_customizationSettingSection.SettingSection, {
+    checked: templates.globalWidgets?.enabled || false,
+    title: "Global Widgets",
+    settingKey: "globalWidgets",
+    onSettingChange: handleToggleChange,
+    disabled: !(0, _useTier.isHighTier)() || isImport && !hasTemplatesForExportGroup('global-widget', data?.uploadedData?.manifest),
+    tooltip: !(0, _useTier.isHighTier)()
+  })), /*#__PURE__*/_react.default.createElement(_upgradeNoticeBanner.UpgradeNoticeBanner, null)));
+}
+KitTemplatesCustomizationDialog.propTypes = {
+  open: PropTypes.bool.isRequired,
+  isImport: PropTypes.bool,
+  isOldExport: PropTypes.bool,
+  isOldElementorVersion: PropTypes.bool,
+  handleClose: PropTypes.func.isRequired,
+  handleSaveChanges: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired
+};
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/components/theme-builder-customization.js":
+/*!***********************************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/components/theme-builder-customization.js ***!
+  \***********************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.ThemeBuilderCustomization = ThemeBuilderCustomization;
+var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "../node_modules/@babel/runtime/helpers/extends.js"));
+var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
+var _i18n = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
+var _upgradeTooltip = __webpack_require__(/*! ./upgrade-tooltip */ "../core/app/modules/import-export-customization/assets/js/components/upgrade-tooltip.js");
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+const ExternalLinkIcon = props => {
+  return /*#__PURE__*/_react.default.createElement(_ui.SvgIcon, (0, _extends2.default)({
+    viewBox: "0 0 18 18",
+    sx: {
+      fontSize: 16,
+      color: 'info.light'
+    }
+  }, props), /*#__PURE__*/_react.default.createElement("path", {
+    fillRule: "evenodd",
+    clipRule: "evenodd",
+    d: "M11 1C11 0.585786 11.3358 0.25 11.75 0.25H16.75C17.1642 0.25 17.5 0.585786 17.5 1V6C17.5 6.41421 17.1642 6.75 16.75 6.75C16.3358 6.75 16 6.41421 16 6V2.81066L7.28033 11.5303C6.98744 11.8232 6.51256 11.8232 6.21967 11.5303C5.92678 11.2374 5.92678 10.7626 6.21967 10.4697L14.9393 1.75H11.75C11.3358 1.75 11 1.41421 11 1ZM0.805456 4.05546C1.32118 3.53973 2.02065 3.25 2.75 3.25H7.75C8.16421 3.25 8.5 3.58579 8.5 4C8.5 4.41421 8.16421 4.75 7.75 4.75H2.75C2.41848 4.75 2.10054 4.8817 1.86612 5.11612C1.6317 5.35054 1.5 5.66848 1.5 6V15C1.5 15.3315 1.6317 15.6495 1.86612 15.8839C2.10054 16.1183 2.41848 16.25 2.75 16.25H11.75C12.0815 16.25 12.3995 16.1183 12.6339 15.8839C12.8683 15.6495 13 15.3315 13 15V10C13 9.58579 13.3358 9.25 13.75 9.25C14.1642 9.25 14.5 9.58579 14.5 10V15C14.5 15.7293 14.2103 16.4288 13.6945 16.9445C13.1788 17.4603 12.4793 17.75 11.75 17.75H2.75C2.02065 17.75 1.32118 17.4603 0.805456 16.9445C0.289731 16.4288 0 15.7293 0 15V6C0 5.27065 0.289731 4.57118 0.805456 4.05546Z",
+    fill: "currentColor"
+  }));
+};
+function ThemeBuilderCustomization({
+  state,
+  settingKey,
+  onStateChange,
+  data,
+  disabled,
+  tooltip = false
+}) {
+  const isImport = data.hasOwnProperty('uploadedData');
+  const [conflicts, setConflicts] = (0, _react.useState)([]);
+  const [loading, setLoading] = (0, _react.useState)(false);
+  (0, _react.useEffect)(() => {
+    if (state?.enabled && isImport) {
+      loadConflicts();
+    } else {
+      setConflicts([]);
+      setLoading(false);
+    }
+  }, [state?.enabled, isImport, data]);
+  const loadConflicts = async () => {
+    setLoading(true);
+    try {
+      const actualConflicts = data?.uploadedData?.conflicts ? Object.entries(data.uploadedData.conflicts) : [];
+      const formattedConflicts = actualConflicts.map(([importedTemplateId, conflictsList]) => {
+        const importedTemplate = data?.uploadedData?.manifest?.templates?.[importedTemplateId];
+        const firstConflict = conflictsList[0];
+        return {
+          template_id: firstConflict.template_id,
+          template_name: firstConflict.template_title,
+          edit_url: firstConflict.edit_url,
+          imported_template_id: parseInt(importedTemplateId),
+          imported_template_name: importedTemplate?.title || 'Unknown Template',
+          location: importedTemplate?.location || '',
+          location_label: getTemplateTypeLabel(importedTemplateId)
+        };
+      });
+      setConflicts(formattedConflicts);
+      if (!state?.overrideConditions || 0 === state.overrideConditions.length) {
+        const defaultOverrides = formattedConflicts.map(conflict => conflict.imported_template_id);
+        onStateChange(settingKey, {
+          ...state,
+          overrideConditions: defaultOverrides
+        });
+      }
+    } catch (error) {
+      setConflicts([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+  const getTemplateTypeLabel = templateId => {
+    const template = data?.uploadedData?.manifest?.templates?.[templateId];
+    if (!template) {
+      return 'Unknown Template';
+    }
+    const templateType = template.doc_type;
+    const summaryTitle = elementorAppConfig?.['import-export-customization']?.summaryTitles?.templates?.[templateType];
+    return summaryTitle?.single || templateType;
+  };
+  const handleToggleEnabled = () => {
+    const newState = {
+      enabled: !state?.enabled
+    };
+    if (isImport) {
+      newState.overrideConditions = state?.enabled ? [] : state?.overrideConditions || [];
+    }
+    onStateChange(settingKey, newState);
+  };
+  const handleConflictChoice = (location, choice, importedTemplateId) => {
+    const currentOverrides = state?.overrideConditions || [];
+    let newOverrides;
+    if ('imported' === choice) {
+      if (!currentOverrides.includes(importedTemplateId)) {
+        newOverrides = [...currentOverrides, importedTemplateId];
+      } else {
+        newOverrides = currentOverrides;
+      }
+    } else {
+      newOverrides = currentOverrides.filter(templateId => templateId !== importedTemplateId);
+    }
+    onStateChange(settingKey, {
+      ...state,
+      overrideConditions: newOverrides
+    });
+  };
+  const getConflictChoice = importedTemplateId => {
+    const overrides = state?.overrideConditions || [];
+    const hasOverride = overrides.includes(importedTemplateId);
+    return hasOverride ? 'imported' : 'current';
+  };
+  const renderConflictTable = () => {
+    if (loading) {
+      return /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+        variant: "body2",
+        color: "text.secondary"
+      }, (0, _i18n.__)('Checking for conflicts...', 'elementor-pro'));
+    }
+    return /*#__PURE__*/_react.default.createElement(_ui.Stack, {
+      spacing: 2
+    }, /*#__PURE__*/_react.default.createElement(_ui.Alert, {
+      severity: "warning"
+    }, /*#__PURE__*/_react.default.createElement(_ui.AlertTitle, {
+      key: "title"
+    }, (0, _i18n.__)('Conflicted part', 'elementor-pro')), (0, _i18n.__)('Some parts are in conflict. Choose which one you want to assign.', 'elementor-pro')), /*#__PURE__*/_react.default.createElement(_ui.TableContainer, {
+      component: _ui.Box,
+      sx: {
+        maxWidth: '100%',
+        border: 1,
+        borderRadius: 1,
+        borderColor: 'action.focus'
+      }
+    }, /*#__PURE__*/_react.default.createElement(_ui.Table, {
+      size: "small"
+    }, /*#__PURE__*/_react.default.createElement(_ui.TableHead, null, /*#__PURE__*/_react.default.createElement(_ui.TableRow, null, /*#__PURE__*/_react.default.createElement(_ui.TableCell, null, (0, _i18n.__)('Conflicted part', 'elementor-pro')), /*#__PURE__*/_react.default.createElement(_ui.TableCell, null, (0, _i18n.__)('Current site part', 'elementor-pro')), /*#__PURE__*/_react.default.createElement(_ui.TableCell, null, (0, _i18n.__)('Imported template part', 'elementor-pro')))), /*#__PURE__*/_react.default.createElement(_ui.TableBody, null, conflicts.map((conflict, index) => /*#__PURE__*/_react.default.createElement(_ui.TableRow, {
+      key: index
+    }, /*#__PURE__*/_react.default.createElement(_ui.TableCell, null, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+      variant: "body2",
+      fontWeight: "medium"
+    }, getTemplateTypeLabel(conflict.imported_template_id))), /*#__PURE__*/_react.default.createElement(_ui.TableCell, null, /*#__PURE__*/_react.default.createElement(_ui.FormControlLabel, {
+      control: /*#__PURE__*/_react.default.createElement(_ui.Radio, {
+        checked: 'current' === getConflictChoice(conflict.imported_template_id, conflict.location),
+        onChange: () => handleConflictChoice(conflict.location, 'current', conflict.imported_template_id),
+        size: "small"
+      }),
+      label: conflict.template_name
+    })), /*#__PURE__*/_react.default.createElement(_ui.TableCell, null, /*#__PURE__*/_react.default.createElement(_ui.FormControlLabel, {
+      control: /*#__PURE__*/_react.default.createElement(_ui.Radio, {
+        checked: 'imported' === getConflictChoice(conflict.imported_template_id, conflict.location),
+        onChange: () => handleConflictChoice(conflict.location, 'imported', conflict.imported_template_id),
+        size: "small"
+      }),
+      label: conflict.imported_template_name
+    }))))))));
+  };
+  return /*#__PURE__*/_react.default.createElement(_ui.Box, {
+    sx: {
+      mb: 3,
+      border: 1,
+      borderRadius: 1,
+      borderColor: 'action.focus',
+      p: 2.5
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.Box, {
+    sx: {
+      display: 'flex',
+      justifyContent: 'space-between',
+      alignItems: 'center'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
+    spacing: 1
+  }, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+    variant: "h6"
+  }, (0, _i18n.__)('Theme builder', 'elementor-pro')), /*#__PURE__*/_react.default.createElement(_ui.Link, {
+    href: elementorAppConfig.base_url + '#/site-editor/templates',
+    target: "_blank",
+    rel: "noopener noreferrer",
+    color: "info.light",
+    underline: "hover",
+    sx: {
+      display: 'inline-flex',
+      alignItems: 'center',
+      gap: 0.5
+    }
+  }, (0, _i18n.__)('Check your themes builder', 'elementor-pro'), /*#__PURE__*/_react.default.createElement(ExternalLinkIcon, null))), /*#__PURE__*/_react.default.createElement(_upgradeTooltip.UpgradeTooltip, {
+    disabled: disabled,
+    tooltip: tooltip
+  }, /*#__PURE__*/_react.default.createElement(_ui.Switch, {
+    "data-testid": `${settingKey}-switch`,
+    checked: state?.enabled || false,
+    disabled: disabled,
+    onChange: handleToggleEnabled,
+    color: "info",
+    size: "medium",
+    sx: {
+      alignSelf: 'center',
+      ...(disabled && tooltip && {
+        cursor: 'pointer'
+      })
+    }
+  }))), state?.enabled && isImport && 0 < conflicts.length && /*#__PURE__*/_react.default.createElement(_ui.Box, {
+    sx: {
+      mt: 1
+    }
+  }, renderConflictTable()));
+}
+ThemeBuilderCustomization.propTypes = {
+  state: PropTypes.object.isRequired,
+  settingKey: PropTypes.string.isRequired,
+  onStateChange: PropTypes.func.isRequired,
+  data: PropTypes.object.isRequired,
+  disabled: PropTypes.bool,
+  tooltip: PropTypes.bool
+};
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/components/upgrade-notice-banner.js":
+/*!*****************************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/components/upgrade-notice-banner.js ***!
+  \*****************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.UpgradeNoticeBanner = UpgradeNoticeBanner;
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
+var _i18n = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+var _useTier = __webpack_require__(/*! ../hooks/use-tier */ "../core/app/modules/import-export-customization/assets/js/hooks/use-tier.js");
+function UpgradeNoticeBanner() {
+  if ((0, _useTier.isHighTier)()) {
+    return null;
+  }
+  return /*#__PURE__*/_react.default.createElement(_ui.Paper, {
+    sx: {
+      position: 'sticky',
+      bottom: 0,
+      marginLeft: -3,
+      marginRight: -3,
+      zIndex: 1000,
+      py: 2,
+      px: 3
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.Paper, {
+    elevation: 0,
+    color: "promotion",
+    sx: {
+      borderRadius: 1,
+      p: 2
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.Box, {
+    sx: {
+      display: 'flex',
+      alignItems: 'flex-start',
+      justifyContent: 'space-between',
+      gap: 2
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.Box, {
+    sx: {
+      flex: 1,
+      minWidth: 0
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+    variant: "body2",
+    color: "text.secondary"
+  }, (0, _i18n.__)('Take control of your workflow. The Expert plan lets you decide exactly what\'s included in your export/import kits, from themes to experiments so nothing gets left behind.', 'elementor'))), /*#__PURE__*/_react.default.createElement(_ui.Button, {
+    variant: "outlined",
+    color: "promotion",
+    onClick: () => window.open('https://go.elementor.com/go-pro-import-export', '_blank'),
+    startIcon: /*#__PURE__*/_react.default.createElement("span", {
+      className: "eicon-upgrade-crown"
+    }),
+    sx: {
+      flexShrink: 0,
+      whiteSpace: 'nowrap'
+    }
+  }, (0, _i18n.__)('Check Expert plan', 'elementor')))));
+}
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/components/upgrade-tooltip.js":
+/*!***********************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/components/upgrade-tooltip.js ***!
+  \***********************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.UpgradeTooltip = void 0;
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+var _extends2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/extends */ "../node_modules/@babel/runtime/helpers/extends.js"));
+var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
+var _i18n = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+const UpgradeTooltip = ({
+  children,
+  disabled = false,
+  tooltip = false,
+  ...props
+}) => {
+  if (disabled && tooltip) {
+    return /*#__PURE__*/_react.default.createElement(_ui.Tooltip, (0, _extends2.default)({
+      title: (0, _i18n.__)('Upgrade your plan to choose which elements to adjust.', 'elementor'),
+      placement: "top",
+      arrow: true,
+      componentsProps: {
+        tooltip: {
+          sx: {
+            maxWidth: 200,
+            fontSize: '12px',
+            fontWeight: 500,
+            lineHeight: 1.4,
+            textAlign: 'center',
+            backgroundColor: 'background.paper',
+            color: 'text.secondary',
+            padding: 1.5,
+            boxShadow: '0 4px 20px rgba(0, 0, 0, 0.15)'
+          }
+        },
+        arrow: {
+          sx: {
+            fontSize: '1.2rem',
+            color: 'background.paper',
+            filter: 'drop-shadow(0 2px 8px rgba(0, 0, 0, 0.15))',
+            '&::before': {
+              backgroundColor: 'background.paper'
+            }
+          }
+        }
+      }
+    }, props), /*#__PURE__*/_react.default.createElement(_ui.Box, {
+      component: "span"
+    }, children));
+  }
+  return children;
+};
+exports.UpgradeTooltip = UpgradeTooltip;
+UpgradeTooltip.propTypes = {
+  children: PropTypes.node.isRequired,
+  disabled: PropTypes.bool,
+  tooltip: PropTypes.bool
+};
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/components/upgrade-version-banner.js":
+/*!******************************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/components/upgrade-version-banner.js ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+/* provided dependency */ var __ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n")["__"];
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.UpgradeVersionBanner = UpgradeVersionBanner;
+var _react = _interopRequireDefault(__webpack_require__(/*! react */ "react"));
+var _ui = __webpack_require__(/*! @elementor/ui */ "@elementor/ui");
+function UpgradeVersionBanner() {
+  return /*#__PURE__*/_react.default.createElement(_ui.Paper, {
+    color: "info",
+    elevation: 0,
+    variant: "elevation"
+  }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
+    direction: "row",
+    sx: {
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      gap: '5px',
+      py: 1.5,
+      px: 2.5
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.Stack, {
+    direction: "row",
+    sx: {
+      alignItems: 'center',
+      gap: '5px'
+    }
+  }, /*#__PURE__*/_react.default.createElement(_ui.SvgIcon, {
+    viewBox: "0 0 22 22",
+    sx: {
+      fontSize: 16,
+      color: 'info.light'
+    }
+  }, /*#__PURE__*/_react.default.createElement("path", {
+    fillRule: "evenodd",
+    clipRule: "evenodd",
+    d: "M4.58268 4.35352C4.5219 4.35352 4.46361 4.37766 4.42064 4.42064C4.37766 4.46361 4.35352 4.5219 4.35352 4.58268V6.64518H6.64518V4.35352H4.58268ZM4.58268 2.97852C4.15723 2.97852 3.7492 3.14753 3.44837 3.44837C3.14753 3.7492 2.97852 4.15723 2.97852 4.58268V17.416C2.97852 17.8415 3.14753 18.2495 3.44837 18.5503C3.74921 18.8512 4.15723 19.0202 4.58268 19.0202H17.416C17.8415 19.0202 18.2495 18.8512 18.5503 18.5503C18.8512 18.2495 19.0202 17.8415 19.0202 17.416V4.58268C19.0202 4.15723 18.8512 3.74921 18.5503 3.44837C18.2495 3.14753 17.8415 2.97852 17.416 2.97852H4.58268ZM8.02018 4.35352V6.64518H17.6452V4.58268C17.6452 4.5219 17.621 4.46361 17.5781 4.42064C17.5351 4.37766 17.4768 4.35352 17.416 4.35352H8.02018ZM17.6452 8.02018H4.35352V17.416C4.35352 17.4768 4.37766 17.5351 4.42064 17.5781C4.46361 17.621 4.5219 17.6452 4.58268 17.6452H17.416C17.4768 17.6452 17.5351 17.621 17.5781 17.5781C17.621 17.5351 17.6452 17.4768 17.6452 17.416V8.02018Z",
+    fill: "currentColor"
+  })), /*#__PURE__*/_react.default.createElement(_ui.Typography, {
+    variant: "body2"
+  }, __('You’re using an older Elementor version. Update for full customization.', 'elementor'))), /*#__PURE__*/_react.default.createElement(_ui.Button, {
+    variant: "outlined",
+    onClick: () => window.open(elementorAppConfig['import-export-customization']?.upgradeVersionUrl, '_blank'),
+    color: "info"
+  }, __('Update version', 'elementor'))));
+}
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/hooks/use-custom-post-types.js":
+/*!************************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/hooks/use-custom-post-types.js ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.useCustomPostTypes = useCustomPostTypes;
+var _react = __webpack_require__(/*! react */ "react");
+function useCustomPostTypes({
+  include = []
+} = {}) {
+  const [customPostTypes, setCustomPostTypes] = (0, _react.useState)([]);
+  (0, _react.useEffect)(() => {
+    const cpt = Object.assign({}, elementorAppConfig['import-export-customization']?.summaryTitles?.content?.customPostTypes || {});
+    if (include.length) {
+      Object.entries(elementorAppConfig['import-export-customization']?.summaryTitles?.content || {}).forEach(([postType, post]) => {
+        if (include.includes(postType)) {
+          cpt[postType] = post;
+        }
+      });
+    }
+    if (Object.keys(cpt).length) {
+      setCustomPostTypes(Object.entries(cpt).map(([postType, post]) => ({
+        value: postType,
+        label: post.single
+      })));
+    }
+  }, []);
+  return {
+    customPostTypes
+  };
+}
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/hooks/use-kit-customization-custom-post-types.js":
+/*!******************************************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/hooks/use-kit-customization-custom-post-types.js ***!
+  \******************************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.useKitCustomizationCustomPostTypes = useKitCustomizationCustomPostTypes;
+__webpack_require__(/*! core-js/modules/es.array.push.js */ "../node_modules/core-js/modules/es.array.push.js");
+var _react = __webpack_require__(/*! react */ "react");
+var _useCustomPostTypes = __webpack_require__(/*! ./use-custom-post-types */ "../core/app/modules/import-export-customization/assets/js/hooks/use-custom-post-types.js");
+function useKitCustomizationCustomPostTypes({
+  data
+}) {
+  const isImport = data?.hasOwnProperty('uploadedData');
+  const {
+    customPostTypes: builtInCustomPostTypes
+  } = (0, _useCustomPostTypes.useCustomPostTypes)({
+    include: ['post']
+  });
+  const customPostTypes = (0, _react.useMemo)(() => {
+    if (!isImport) {
+      return builtInCustomPostTypes;
+    }
+    const customPostTypesTitles = Object.values(data?.uploadedData?.manifest?.['custom-post-type-title'] || {}).map(postType => {
+      return {
+        value: postType.name,
+        label: postType.label
+      };
+    });
+    if (!customPostTypesTitles.some(postType => 'post' === postType.value)) {
+      customPostTypesTitles.push({
+        value: 'post',
+        label: 'Post'
+      });
+    }
+    const wpContent = data?.uploadedData?.manifest?.['wp-content'] || {};
+    const content = data?.uploadedData?.manifest?.content || {};
+    return customPostTypesTitles.filter(postType => {
+      const postTypeValue = postType.value;
+      const wpContentObject = wpContent[postTypeValue];
+      const isInWpContent = wpContentObject && 'object' === typeof wpContentObject && Object.keys(wpContentObject).length > 0;
+      const contentObject = content[postTypeValue];
+      const isInElementorContent = contentObject && 'object' === typeof contentObject && Object.keys(contentObject).length > 0;
+      return isInWpContent || isInElementorContent;
+    });
+  }, [isImport, data?.uploadedData, builtInCustomPostTypes]);
+  return {
+    customPostTypes
+  };
+}
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/hooks/use-kit-customization-pages.js":
+/*!******************************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/hooks/use-kit-customization-pages.js ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.useKitCustomizationPages = useKitCustomizationPages;
+var _react = __webpack_require__(/*! react */ "react");
+var _usePages = __webpack_require__(/*! ./use-pages */ "../core/app/modules/import-export-customization/assets/js/hooks/use-pages.js");
+function useKitCustomizationPages({
+  data,
+  open
+}) {
+  const isImport = data?.hasOwnProperty('uploadedData');
+  const {
+    isLoading,
+    pageOptions: loadedPagesOptions,
+    isLoaded
+  } = (0, _usePages.usePages)({
+    skipLoading: isImport || !open
+  });
+  const pageOptions = (0, _react.useMemo)(() => {
+    if (!isImport) {
+      return loadedPagesOptions;
+    }
+    const elementorPages = Object.entries(data?.uploadedData?.manifest?.content?.page || {}).map(([id, page]) => {
+      return {
+        value: id,
+        label: page.title
+      };
+    });
+    const wpPages = Object.entries(data?.uploadedData?.manifest?.['wp-content']?.page || {}).map(([id, page]) => {
+      return {
+        value: id,
+        label: page.title
+      };
+    });
+    return [...elementorPages, ...wpPages];
+  }, [loadedPagesOptions, isImport, data?.uploadedData]);
+  return {
+    isLoading,
+    pageOptions,
+    isLoaded
+  };
+}
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/hooks/use-kit-customization-taxonomies.js":
+/*!***********************************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/hooks/use-kit-customization-taxonomies.js ***!
+  \***********************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.useKitCustomizationTaxonomies = useKitCustomizationTaxonomies;
+var _react = __webpack_require__(/*! react */ "react");
+var _useTaxonomies = __webpack_require__(/*! ./use-taxonomies */ "../core/app/modules/import-export-customization/assets/js/hooks/use-taxonomies.js");
+function useKitCustomizationTaxonomies({
+  data,
+  open
+}) {
+  const isImport = data?.hasOwnProperty('uploadedData');
+  const {
+    isLoading,
+    taxonomyOptions: loadedTaxonomyOptions,
+    isLoaded
+  } = (0, _useTaxonomies.useTaxonomies)({
+    skipLoading: isImport || !open,
+    exclude: ['nav_menu']
+  });
+  const taxonomyOptions = (0, _react.useMemo)(() => {
+    if (!isImport) {
+      return loadedTaxonomyOptions;
+    }
+    const taxonomiesMap = {};
+    Object.values(data?.uploadedData?.manifest?.taxonomies || {}).forEach(taxonomiesListForPostType => {
+      taxonomiesListForPostType.forEach(taxonomy => {
+        const taxonomyObj = 'string' === typeof taxonomy
+        // BC For Old Export
+        ? {
+          name: taxonomy,
+          label: taxonomy.split('_').join(' ')
+        } : taxonomy;
+        if (!taxonomiesMap[taxonomyObj.name]) {
+          taxonomiesMap[taxonomyObj.name] = {
+            value: taxonomyObj.name,
+            label: taxonomyObj.label
+          };
+        }
+      });
+    });
+    return Object.values(taxonomiesMap);
+  }, [data?.uploadedData, isImport, loadedTaxonomyOptions]);
+  return {
+    taxonomyOptions,
+    isLoading,
+    isLoaded
+  };
+}
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/hooks/use-pages.js":
+/*!************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/hooks/use-pages.js ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.usePages = usePages;
+var _react = __webpack_require__(/*! react */ "react");
+function usePages({
+  skipLoading = false
+} = {}) {
+  const [pages, setPages] = (0, _react.useState)([]);
+  const [isLoading, setIsLoading] = (0, _react.useState)(false);
+  const [error, setError] = (0, _react.useState)(null);
+  const [hasMorePages, setHasMorePages] = (0, _react.useState)(true);
+  const isLoaded = (0, _react.useRef)(null);
+  const fetchAllPages = (0, _react.useCallback)(async () => {
+    if (isLoaded.current) {
+      return;
+    }
+    try {
+      setIsLoading(true);
+      setError(null);
+      setPages([]);
+      setHasMorePages(true);
+      let currentPage = 1;
+      let allPages = [];
+      while (hasMorePages || 1 === currentPage) {
+        const baseUrl = new URL(elementorCommon.config.urls.rest, window.location.origin);
+        const isPlainPermalink = 'index.php' === baseUrl.pathname.replace(/\//g, '');
+        baseUrl.pathname = isPlainPermalink ? baseUrl.pathname : `${baseUrl.pathname}wp/v2/pages`;
+        if (isPlainPermalink) {
+          baseUrl.searchParams.set('rest_route', '/wp/v2/pages');
+        }
+        baseUrl.searchParams.append('page', 1);
+        baseUrl.searchParams.append('per_page', 100);
+        baseUrl.searchParams.append('_embed', '');
+        const response = await fetch(baseUrl.toString(), {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-WP-Nonce': window.wpApiSettings?.nonce || ''
+          }
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        const totalPages = parseInt(response.headers.get('X-WP-TotalPages') || '1');
+        allPages = [...allPages, ...data];
+        if (totalPages <= currentPage) {
+          setHasMorePages(false);
+          break;
+        }
+        currentPage++;
+      }
+      setPages(allPages);
+      isLoaded.current = true;
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }, [hasMorePages]);
+  const refreshPages = (0, _react.useCallback)(() => {
+    fetchAllPages();
+  }, [fetchAllPages]);
+  const pageOptions = (0, _react.useMemo)(() => {
+    return pages.map(page => ({
+      value: page.id,
+      label: page.title.rendered
+    }));
+  }, [pages]);
+  (0, _react.useEffect)(() => {
+    if (!skipLoading) {
+      fetchAllPages();
+    }
+  }, [skipLoading]);
+  return {
+    pages,
+    isLoading,
+    error,
+    refreshPages,
+    pageOptions,
+    isLoaded: isLoaded.current
+  };
+}
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/hooks/use-taxonomies.js":
+/*!*****************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/hooks/use-taxonomies.js ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.useTaxonomies = useTaxonomies;
+var _react = __webpack_require__(/*! react */ "react");
+const fetchTaxonomies = async () => {
+  const requestUrl = `${elementorCommon.config.urls.rest}wp/v2/taxonomies`;
+  const response = await fetch(requestUrl, {
+    headers: {
+      'Content-Type': 'application/json',
+      'X-WP-Nonce': window.wpApiSettings?.nonce || ''
+    }
+  });
+  const result = await response.json();
+  if (!response.ok) {
+    const errorMessage = result?.data?.message || `HTTP error! with the following code: ${result?.data?.code}`;
+    throw new Error(errorMessage);
+  }
+  return Object.values(result);
+};
+function useTaxonomies({
+  skipLoading = false,
+  exclude = []
+} = {}) {
+  const [taxonomies, setTaxonomies] = (0, _react.useState)([]);
+  const [isLoading, setIsLoading] = (0, _react.useState)(false);
+  const [error, setError] = (0, _react.useState)(null);
+  const isLoaded = (0, _react.useRef)(null);
+  const fetchAllTaxonomies = (0, _react.useCallback)(async () => {
+    if (isLoaded.current) {
+      return;
+    }
+    try {
+      setIsLoading(true);
+      setError(null);
+      const data = await fetchTaxonomies();
+      setTaxonomies(exclude.length ? data.filter(taxonomy => !exclude.includes(taxonomy.slug)) : data);
+      isLoaded.current = true;
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+  const refreshTaxonomies = (0, _react.useCallback)(() => {
+    fetchAllTaxonomies();
+  }, [fetchAllTaxonomies]);
+  const taxonomyOptions = (0, _react.useMemo)(() => {
+    return taxonomies.map(taxonomy => ({
+      value: taxonomy.slug,
+      label: taxonomy.name
+    }));
+  }, [taxonomies]);
+  (0, _react.useEffect)(() => {
+    if (!skipLoading) {
+      fetchAllTaxonomies();
+    }
+  }, [skipLoading]);
+  return {
+    taxonomies,
+    isLoading,
+    error,
+    refreshTaxonomies,
+    taxonomyOptions,
+    isLoaded: isLoaded.current
+  };
+}
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/hooks/use-tier.js":
+/*!***********************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/hooks/use-tier.js ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.isHighTier = void 0;
+const isHighTier = () => {
+  try {
+    return 'expert' === elementorCommon?.config?.library_connect?.plan_type || 'agency' === elementorCommon?.config?.library_connect?.plan_type;
+  } catch (error) {
+    return false;
+  }
+};
+exports.isHighTier = isHighTier;
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/module.js":
+/*!***************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/module.js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+var _kitContentCustomizationDialog = __webpack_require__(/*! ./components/kit-content-customization-dialog */ "../core/app/modules/import-export-customization/assets/js/components/kit-content-customization-dialog.js");
+var _kitTemplatesCustomizationDialog = __webpack_require__(/*! ./components/kit-templates-customization-dialog */ "../core/app/modules/import-export-customization/assets/js/components/kit-templates-customization-dialog.js");
+var _kitSettingsCustomizationDialog = __webpack_require__(/*! ./components/kit-settings-customization-dialog */ "../core/app/modules/import-export-customization/assets/js/components/kit-settings-customization-dialog.js");
+class Module {
+  constructor() {
+    this.registerCustomizationDialogs();
+  }
+  registerCustomizationDialogs() {
+    if (!elementorCommon?.config?.experimentalFeatures?.['import-export-customization']) {
+      return;
+    }
+    const registry = window.elementorModules?.importExport?.customizationDialogsRegistry;
+    if (!registry) {
+      return;
+    }
+    registry.register({
+      key: 'content',
+      title: 'Content Dialog',
+      component: _kitContentCustomizationDialog.KitContentCustomizationDialog
+    });
+    registry.register({
+      key: 'templates',
+      title: 'Templates Dialog',
+      component: _kitTemplatesCustomizationDialog.KitTemplatesCustomizationDialog
+    });
+    registry.register({
+      key: 'settings',
+      title: 'Settings Dialog',
+      component: _kitSettingsCustomizationDialog.KitSettingsCustomizationDialog
+    });
+  }
+}
+exports["default"] = Module;
+
+/***/ }),
+
+/***/ "../core/app/modules/import-export-customization/assets/js/utils/analytics-transformer.js":
+/*!************************************************************************************************!*\
+  !*** ../core/app/modules/import-export-customization/assets/js/utils/analytics-transformer.js ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports.transformValueForAnalytics = exports.getTotalAvailableCount = exports.ANALYTICS_TRANSFORM_RULES = void 0;
+const ANALYTICS_TRANSFORM_RULES = exports.ANALYTICS_TRANSFORM_RULES = {
+  STRING: value => value,
+  BOOLEAN: value => value,
+  EMPTY_ARRAY: () => 'None',
+  FULL_ARRAY: () => 'All',
+  PARTIAL_ARRAY: () => 'Partial'
+};
+const getTotalAvailableCount = (key, optionsArray) => {
+  const optionsMap = optionsArray.reduce((map, {
+    key: optionKey,
+    options
+  }) => {
+    map[optionKey] = options.length;
+    return map;
+  }, {});
+  return optionsMap[key] || 0;
+};
+exports.getTotalAvailableCount = getTotalAvailableCount;
+const transformValueForAnalytics = (key, value, optionsArray) => {
+  if ('string' === typeof value || 'boolean' === typeof value) {
+    return ANALYTICS_TRANSFORM_RULES[(typeof value).toUpperCase()](value);
+  }
+  if ('object' === typeof value && value !== null && !Array.isArray(value) && 'enabled' in value) {
+    return value.enabled;
+  }
+  if (Array.isArray(value)) {
+    if (0 === value.length) {
+      return ANALYTICS_TRANSFORM_RULES.EMPTY_ARRAY();
+    }
+    const totalAvailable = getTotalAvailableCount(key, optionsArray);
+    const isFullSelection = value.length === totalAvailable;
+    return isFullSelection ? ANALYTICS_TRANSFORM_RULES.FULL_ARRAY() : ANALYTICS_TRANSFORM_RULES.PARTIAL_ARRAY();
+  }
+  return value;
+};
+exports.transformValueForAnalytics = transformValueForAnalytics;
 
 /***/ }),
 
@@ -2014,7 +4269,7 @@ class ConditionsProvider extends _baseContext.default {
           options: this.conditionsConfig.getOptions(),
           subOptions: this.conditionsConfig.getSubOptions(condition.name),
           subIdAutocomplete: this.conditionsConfig.getSubIdAutocomplete(condition.sub),
-          supIdOptions: condition.subId ? [{
+          subIdOptions: condition.subId ? [{
             value: condition.subId,
             label: ''
           }] : []
@@ -2670,7 +4925,7 @@ Object.defineProperty(exports, "__esModule", ({
 exports["default"] = void 0;
 var dataCommands = _interopRequireWildcard(__webpack_require__(/*! ./commands */ "../core/app/modules/site-editor/assets/js/data/commands/index.js"));
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 class Component extends $e.modules.ComponentBase {
   static namespace = 'site-editor';
   getNamespace() {
@@ -2701,7 +4956,7 @@ exports["default"] = useTemplatesScreenshot;
 var _templates = __webpack_require__(/*! ../context/templates */ "../core/app/modules/site-editor/assets/js/context/templates.js");
 var _useScreenshot = _interopRequireWildcard(__webpack_require__(/*! modules/screenshots/app/assets/js/hooks/use-screenshot */ "../modules/screenshots/app/assets/js/hooks/use-screenshot.js"));
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 /**
  * Wrapper function that was made to take screenshots specific for template.
  * it will capture a screenshot and update the templates context with the new screenshot.
@@ -3233,6 +5488,39 @@ function AddNew() {
 
 /***/ }),
 
+/***/ "../core/app/modules/site-editor/assets/js/pages/conditions/condition-button-portal.js":
+/*!*********************************************************************************************!*\
+  !*** ../core/app/modules/site-editor/assets/js/pages/conditions/condition-button-portal.js ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", ({
+  value: true
+}));
+exports["default"] = void 0;
+var _reactDom = __webpack_require__(/*! react-dom */ "react-dom");
+var _react = __webpack_require__(/*! react */ "react");
+var PropTypes = _interopRequireWildcard(__webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js"));
+function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+const ConditionButtonPortal = props => {
+  const [shouldCreatePortal, setShouldCreatePortal] = (0, _react.useState)(false),
+    portalRoot = document.getElementById('portal-root');
+  (0, _react.useEffect)(() => {
+    setShouldCreatePortal(!!portalRoot);
+  }, [portalRoot]);
+  return shouldCreatePortal ? (0, _reactDom.createPortal)(props.children, portalRoot) : null;
+};
+ConditionButtonPortal.propTypes = {
+  children: PropTypes.oneOfType([PropTypes.node, PropTypes.string])
+};
+var _default = exports["default"] = ConditionButtonPortal;
+
+/***/ }),
+
 /***/ "../core/app/modules/site-editor/assets/js/pages/conditions/condition-conflicts.js":
 /*!*****************************************************************************************!*\
   !*** ../core/app/modules/site-editor/assets/js/pages/conditions/condition-conflicts.js ***!
@@ -3240,6 +5528,7 @@ function AddNew() {
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 "use strict";
+/* provided dependency */ var sprintf = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n")["sprintf"];
 /* provided dependency */ var __ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n")["__"];
 /* provided dependency */ var PropTypes = __webpack_require__(/*! prop-types */ "../node_modules/prop-types/index.js");
 
@@ -3266,7 +5555,8 @@ function ConditionConflicts(props) {
   return /*#__PURE__*/_react.default.createElement(_appUi.Text, {
     className: "e-site-editor-conditions__conflict",
     variant: "sm"
-  }, __('Elementor recognized that you have set this location for other templates: ', 'elementor-pro'), " ", conflictLinks);
+  }, sprintf(/* Translators: %s: a list of conflicted templates */
+  __('We noticed that you already applied %s with the same condition.', 'elementor-pro'), conflictLinks), /*#__PURE__*/_react.default.createElement("br", null), __("To continue, set different conditions for each so they don't conflict.", 'elementor-pro'));
 }
 ConditionConflicts.propTypes = {
   conflicts: PropTypes.array.isRequired
@@ -3544,6 +5834,7 @@ var _conditionName = _interopRequireDefault(__webpack_require__(/*! ./condition-
 var _conditionSub = _interopRequireDefault(__webpack_require__(/*! ./condition-sub */ "../core/app/modules/site-editor/assets/js/pages/conditions/condition-sub.js"));
 var _conditionSubId = _interopRequireDefault(__webpack_require__(/*! ./condition-sub-id */ "../core/app/modules/site-editor/assets/js/pages/conditions/condition-sub-id.js"));
 var _conditionConflicts = _interopRequireDefault(__webpack_require__(/*! ./condition-conflicts */ "../core/app/modules/site-editor/assets/js/pages/conditions/condition-conflicts.js"));
+var _conditionButtonPortal = _interopRequireDefault(__webpack_require__(/*! ./condition-button-portal */ "../core/app/modules/site-editor/assets/js/pages/conditions/condition-button-portal.js"));
 function ConditionsRows(props) {
   const {
     conditions,
@@ -3579,6 +5870,17 @@ function ConditionsRows(props) {
   })), /*#__PURE__*/_react.default.createElement(_conditionConflicts.default, {
     conflicts: condition.conflictErrors
   })));
+  const SaveButton = () => {
+    return /*#__PURE__*/_react.default.createElement(_appUi.Button, {
+      variant: "contained",
+      color: "primary",
+      size: "lg",
+      hideText: isSaving,
+      icon: isSaving ? 'eicon-loading eicon-animation-spin' : '',
+      text: __('Save & Close', 'elementor-pro'),
+      onClick: () => save().then(props.onAfterSave)
+    });
+  };
   const isSaving = action.current === _conditions.ConditionsProvider.actions.SAVE && action.loading;
   return /*#__PURE__*/_react.default.createElement(_react.default.Fragment, null, action.error && /*#__PURE__*/_react.default.createElement(_appUi.Dialog, {
     text: action.error,
@@ -3600,18 +5902,11 @@ function ConditionsRows(props) {
     onClick: create
   })), /*#__PURE__*/_react.default.createElement("div", {
     className: "e-site-editor-conditions__footer"
-  }, /*#__PURE__*/_react.default.createElement(_appUi.Button, {
-    variant: "contained",
-    color: "primary",
-    size: "lg",
-    hideText: isSaving,
-    icon: isSaving ? 'eicon-loading eicon-animation-spin' : '',
-    text: __('Save & Close', 'elementor-pro'),
-    onClick: () => save().then(props.onAfterSave)
-  })));
+  }, props?.loadPortal ? /*#__PURE__*/_react.default.createElement(_conditionButtonPortal.default, null, /*#__PURE__*/_react.default.createElement(SaveButton, null)) : /*#__PURE__*/_react.default.createElement(SaveButton, null)));
 }
 ConditionsRows.propTypes = {
-  onAfterSave: PropTypes.func
+  onAfterSave: PropTypes.func,
+  loadPortal: PropTypes.bool
 };
 
 /***/ }),
@@ -3659,13 +5954,14 @@ function Conditions(props) {
   }), /*#__PURE__*/_react.default.createElement(_appUi.Heading, {
     variant: "h1",
     tag: "h1"
-  }, __('Where Do You Want to Display Your Template?', 'elementor-pro')), /*#__PURE__*/_react.default.createElement(_appUi.Text, {
+  }, __('Where do you want to display your template?', 'elementor-pro')), /*#__PURE__*/_react.default.createElement(_appUi.Text, {
     variant: "p"
   }, __('Set the conditions that determine where your template is used throughout your site.', 'elementor-pro'), /*#__PURE__*/_react.default.createElement("br", null), __('For example, choose \'Entire Site\' to display the template across your site.', 'elementor-pro'))), /*#__PURE__*/_react.default.createElement(_conditions.default, {
     currentTemplate: template,
     onConditionsSaved: updateTemplateItemState
   }, /*#__PURE__*/_react.default.createElement(_conditionsRows.default, {
-    onAfterSave: () => history.back()
+    onAfterSave: () => history.back(),
+    loadPortal: true
   })));
 }
 Conditions.propTypes = {
@@ -3970,7 +6266,7 @@ var _react = _interopRequireWildcard(__webpack_require__(/*! react */ "react"));
 var _appUi = __webpack_require__(/*! @elementor/app-ui */ "@elementor/app-ui");
 var _templates = __webpack_require__(/*! ../context/templates */ "../core/app/modules/site-editor/assets/js/context/templates.js");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function DialogRename(props) {
   const {
       findTemplateItemInState,
@@ -4132,7 +6428,7 @@ var _component = _interopRequireDefault(__webpack_require__(/*! ./data/component
 var _useFeatureLock = _interopRequireDefault(__webpack_require__(/*! elementor-pro-app/hooks/use-feature-lock */ "../core/app/assets/js/hooks/use-feature-lock.js"));
 __webpack_require__(/*! ./site-editor.scss */ "../core/app/modules/site-editor/assets/js/site-editor.scss");
 function _getRequireWildcardCache(e) { if ("function" != typeof WeakMap) return null; var r = new WeakMap(), t = new WeakMap(); return (_getRequireWildcardCache = function (e) { return e ? t : r; })(e); }
-function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && Object.prototype.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
+function _interopRequireWildcard(e, r) { if (!r && e && e.__esModule) return e; if (null === e || "object" != typeof e && "function" != typeof e) return { default: e }; var t = _getRequireWildcardCache(r); if (t && t.has(e)) return t.get(e); var n = { __proto__: null }, a = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var u in e) if ("default" !== u && {}.hasOwnProperty.call(e, u)) { var i = a ? Object.getOwnPropertyDescriptor(e, u) : null; i && (i.get || i.set) ? Object.defineProperty(n, u, i) : n[u] = e[u]; } return n.default = e, t && t.set(e, n), n; }
 function SiteEditor() {
   const {
     isLocked
@@ -4200,11 +6496,14 @@ function SiteEditor() {
   }), /*#__PURE__*/_react.default.createElement(_siteEditor.NotFound, {
     default: true
   }))))), /*#__PURE__*/_react.default.createElement(_appUi.Grid, {
-    item: true,
+    container: true,
+    justify: "space-between",
     className: "e-site-editor__content_container_secondary"
   }, /*#__PURE__*/_react.default.createElement(_appUi.Button, {
     text: __('Switch to table view', 'elementor-pro'),
     url: elementorAppProConfig['site-editor']?.urls?.legacy_view
+  }), window.location.href.indexOf('conditions') !== -1 && /*#__PURE__*/_react.default.createElement("div", {
+    id: "portal-root"
   })))));
 }
 class Module {
@@ -5850,6 +8149,17 @@ module.exports = React;
 
 /***/ }),
 
+/***/ "react-dom":
+/*!***************************!*\
+  !*** external "ReactDOM" ***!
+  \***************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = ReactDOM;
+
+/***/ }),
+
 /***/ "@elementor/app-ui":
 /*!*********************************************!*\
   !*** external "elementorAppPackages.appUi" ***!
@@ -5894,6 +8204,17 @@ module.exports = elementorAppPackages.siteEditor;
 
 /***/ }),
 
+/***/ "@elementor/ui":
+/*!*********************************!*\
+  !*** external "elementorV2.ui" ***!
+  \*********************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = elementorV2.ui;
+
+/***/ }),
+
 /***/ "@wordpress/i18n":
 /*!**************************!*\
   !*** external "wp.i18n" ***!
@@ -5912,18 +8233,13 @@ module.exports = wp.i18n;
 /***/ ((module) => {
 
 function _extends() {
-  module.exports = _extends = Object.assign ? Object.assign.bind() : function (target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = arguments[i];
-      for (var key in source) {
-        if (Object.prototype.hasOwnProperty.call(source, key)) {
-          target[key] = source[key];
-        }
-      }
+  return module.exports = _extends = Object.assign ? Object.assign.bind() : function (n) {
+    for (var e = 1; e < arguments.length; e++) {
+      var t = arguments[e];
+      for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]);
     }
-    return target;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  return _extends.apply(this, arguments);
+    return n;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports, _extends.apply(null, arguments);
 }
 module.exports = _extends, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
@@ -5935,9 +8251,9 @@ module.exports = _extends, module.exports.__esModule = true, module.exports["def
   \***********************************************************************/
 /***/ ((module) => {
 
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    "default": obj
+function _interopRequireDefault(e) {
+  return e && e.__esModule ? e : {
+    "default": e
   };
 }
 module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
@@ -6005,6 +8321,7 @@ var createMethod = function (IS_INCLUDES) {
   return function ($this, el, fromIndex) {
     var O = toIndexedObject($this);
     var length = lengthOfArrayLike(O);
+    if (length === 0) return !IS_INCLUDES && -1;
     var index = toAbsoluteIndex(fromIndex, length);
     var value;
     // Array#includes uses SameValueZero equality algorithm
@@ -6207,16 +8524,16 @@ module.exports = function (O, key, value, options) {
 
 "use strict";
 
-var global = __webpack_require__(/*! ../internals/global */ "../node_modules/core-js/internals/global.js");
+var globalThis = __webpack_require__(/*! ../internals/global-this */ "../node_modules/core-js/internals/global-this.js");
 
 // eslint-disable-next-line es/no-object-defineproperty -- safe
 var defineProperty = Object.defineProperty;
 
 module.exports = function (key, value) {
   try {
-    defineProperty(global, key, { value: value, configurable: true, writable: true });
+    defineProperty(globalThis, key, { value: value, configurable: true, writable: true });
   } catch (error) {
-    global[key] = value;
+    globalThis[key] = value;
   } return value;
 };
 
@@ -6242,28 +8559,6 @@ module.exports = !fails(function () {
 
 /***/ }),
 
-/***/ "../node_modules/core-js/internals/document-all.js":
-/*!*********************************************************!*\
-  !*** ../node_modules/core-js/internals/document-all.js ***!
-  \*********************************************************/
-/***/ ((module) => {
-
-"use strict";
-
-var documentAll = typeof document == 'object' && document.all;
-
-// https://tc39.es/ecma262/#sec-IsHTMLDDA-internal-slot
-// eslint-disable-next-line unicorn/no-typeof-undefined -- required for testing
-var IS_HTMLDDA = typeof documentAll == 'undefined' && documentAll !== undefined;
-
-module.exports = {
-  all: documentAll,
-  IS_HTMLDDA: IS_HTMLDDA
-};
-
-
-/***/ }),
-
 /***/ "../node_modules/core-js/internals/document-create-element.js":
 /*!********************************************************************!*\
   !*** ../node_modules/core-js/internals/document-create-element.js ***!
@@ -6272,10 +8567,10 @@ module.exports = {
 
 "use strict";
 
-var global = __webpack_require__(/*! ../internals/global */ "../node_modules/core-js/internals/global.js");
+var globalThis = __webpack_require__(/*! ../internals/global-this */ "../node_modules/core-js/internals/global-this.js");
 var isObject = __webpack_require__(/*! ../internals/is-object */ "../node_modules/core-js/internals/is-object.js");
 
-var document = global.document;
+var document = globalThis.document;
 // typeof document.createElement is 'object' in old IE
 var EXISTS = isObject(document) && isObject(document.createElement);
 
@@ -6305,32 +8600,59 @@ module.exports = function (it) {
 
 /***/ }),
 
-/***/ "../node_modules/core-js/internals/engine-user-agent.js":
-/*!**************************************************************!*\
-  !*** ../node_modules/core-js/internals/engine-user-agent.js ***!
-  \**************************************************************/
+/***/ "../node_modules/core-js/internals/enum-bug-keys.js":
+/*!**********************************************************!*\
+  !*** ../node_modules/core-js/internals/enum-bug-keys.js ***!
+  \**********************************************************/
 /***/ ((module) => {
 
 "use strict";
 
-module.exports = typeof navigator != 'undefined' && String(navigator.userAgent) || '';
+// IE8- don't enum bug keys
+module.exports = [
+  'constructor',
+  'hasOwnProperty',
+  'isPrototypeOf',
+  'propertyIsEnumerable',
+  'toLocaleString',
+  'toString',
+  'valueOf'
+];
 
 
 /***/ }),
 
-/***/ "../node_modules/core-js/internals/engine-v8-version.js":
-/*!**************************************************************!*\
-  !*** ../node_modules/core-js/internals/engine-v8-version.js ***!
-  \**************************************************************/
+/***/ "../node_modules/core-js/internals/environment-user-agent.js":
+/*!*******************************************************************!*\
+  !*** ../node_modules/core-js/internals/environment-user-agent.js ***!
+  \*******************************************************************/
 /***/ ((module, __unused_webpack_exports, __webpack_require__) => {
 
 "use strict";
 
-var global = __webpack_require__(/*! ../internals/global */ "../node_modules/core-js/internals/global.js");
-var userAgent = __webpack_require__(/*! ../internals/engine-user-agent */ "../node_modules/core-js/internals/engine-user-agent.js");
+var globalThis = __webpack_require__(/*! ../internals/global-this */ "../node_modules/core-js/internals/global-this.js");
 
-var process = global.process;
-var Deno = global.Deno;
+var navigator = globalThis.navigator;
+var userAgent = navigator && navigator.userAgent;
+
+module.exports = userAgent ? String(userAgent) : '';
+
+
+/***/ }),
+
+/***/ "../node_modules/core-js/internals/environment-v8-version.js":
+/*!*******************************************************************!*\
+  !*** ../node_modules/core-js/internals/environment-v8-version.js ***!
+  \*******************************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+"use strict";
+
+var globalThis = __webpack_require__(/*! ../internals/global-this */ "../node_modules/core-js/internals/global-this.js");
+var userAgent = __webpack_require__(/*! ../internals/environment-user-agent */ "../node_modules/core-js/internals/environment-user-agent.js");
+
+var process = globalThis.process;
+var Deno = globalThis.Deno;
 var versions = process && process.versions || Deno && Deno.version;
 var v8 = versions && versions.v8;
 var match, version;
@@ -6357,28 +8679,6 @@ module.exports = version;
 
 /***/ }),
 
-/***/ "../node_modules/core-js/internals/enum-bug-keys.js":
-/*!**********************************************************!*\
-  !*** ../node_modules/core-js/internals/enum-bug-keys.js ***!
-  \**********************************************************/
-/***/ ((module) => {
-
-"use strict";
-
-// IE8- don't enum bug keys
-module.exports = [
-  'constructor',
-  'hasOwnProperty',
-  'isPrototypeOf',
-  'propertyIsEnumerable',
-  'toLocaleString',
-  'toString',
-  'valueOf'
-];
-
-
-/***/ }),
-
 /***/ "../node_modules/core-js/internals/export.js":
 /*!***************************************************!*\
   !*** ../node_modules/core-js/internals/export.js ***!
@@ -6387,7 +8687,7 @@ module.exports = [
 
 "use strict";
 
-var global = __webpack_require__(/*! ../internals/global */ "../node_modules/core-js/internals/global.js");
+var globalThis = __webpack_require__(/*! ../internals/global-this */ "../node_modules/core-js/internals/global-this.js");
 var getOwnPropertyDescriptor = (__webpack_require__(/*! ../internals/object-get-own-property-descriptor */ "../node_modules/core-js/internals/object-get-own-property-descriptor.js").f);
 var createNonEnumerableProperty = __webpack_require__(/*! ../internals/create-non-enumerable-property */ "../node_modules/core-js/internals/create-non-enumerable-property.js");
 var defineBuiltIn = __webpack_require__(/*! ../internals/define-built-in */ "../node_modules/core-js/internals/define-built-in.js");
@@ -6416,11 +8716,11 @@ module.exports = function (options, source) {
   var STATIC = options.stat;
   var FORCED, target, key, targetProperty, sourceProperty, descriptor;
   if (GLOBAL) {
-    target = global;
+    target = globalThis;
   } else if (STATIC) {
-    target = global[TARGET] || defineGlobalProperty(TARGET, {});
+    target = globalThis[TARGET] || defineGlobalProperty(TARGET, {});
   } else {
-    target = (global[TARGET] || {}).prototype;
+    target = globalThis[TARGET] && globalThis[TARGET].prototype;
   }
   if (target) for (key in source) {
     sourceProperty = source[key];
@@ -6563,7 +8863,7 @@ module.exports = NATIVE_BIND ? uncurryThisWithBind : function (fn) {
 
 "use strict";
 
-var global = __webpack_require__(/*! ../internals/global */ "../node_modules/core-js/internals/global.js");
+var globalThis = __webpack_require__(/*! ../internals/global-this */ "../node_modules/core-js/internals/global-this.js");
 var isCallable = __webpack_require__(/*! ../internals/is-callable */ "../node_modules/core-js/internals/is-callable.js");
 
 var aFunction = function (argument) {
@@ -6571,7 +8871,7 @@ var aFunction = function (argument) {
 };
 
 module.exports = function (namespace, method) {
-  return arguments.length < 2 ? aFunction(global[namespace]) : global[namespace] && global[namespace][method];
+  return arguments.length < 2 ? aFunction(globalThis[namespace]) : globalThis[namespace] && globalThis[namespace][method];
 };
 
 
@@ -6598,10 +8898,10 @@ module.exports = function (V, P) {
 
 /***/ }),
 
-/***/ "../node_modules/core-js/internals/global.js":
-/*!***************************************************!*\
-  !*** ../node_modules/core-js/internals/global.js ***!
-  \***************************************************/
+/***/ "../node_modules/core-js/internals/global-this.js":
+/*!********************************************************!*\
+  !*** ../node_modules/core-js/internals/global-this.js ***!
+  \********************************************************/
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 "use strict";
@@ -6618,8 +8918,9 @@ module.exports =
   // eslint-disable-next-line no-restricted-globals -- safe
   check(typeof self == 'object' && self) ||
   check(typeof __webpack_require__.g == 'object' && __webpack_require__.g) ||
+  check(typeof this == 'object' && this) ||
   // eslint-disable-next-line no-new-func -- fallback
-  (function () { return this; })() || this || Function('return this')();
+  (function () { return this; })() || Function('return this')();
 
 
 /***/ }),
@@ -6745,7 +9046,7 @@ module.exports = store.inspectSource;
 "use strict";
 
 var NATIVE_WEAK_MAP = __webpack_require__(/*! ../internals/weak-map-basic-detection */ "../node_modules/core-js/internals/weak-map-basic-detection.js");
-var global = __webpack_require__(/*! ../internals/global */ "../node_modules/core-js/internals/global.js");
+var globalThis = __webpack_require__(/*! ../internals/global-this */ "../node_modules/core-js/internals/global-this.js");
 var isObject = __webpack_require__(/*! ../internals/is-object */ "../node_modules/core-js/internals/is-object.js");
 var createNonEnumerableProperty = __webpack_require__(/*! ../internals/create-non-enumerable-property */ "../node_modules/core-js/internals/create-non-enumerable-property.js");
 var hasOwn = __webpack_require__(/*! ../internals/has-own-property */ "../node_modules/core-js/internals/has-own-property.js");
@@ -6754,8 +9055,8 @@ var sharedKey = __webpack_require__(/*! ../internals/shared-key */ "../node_modu
 var hiddenKeys = __webpack_require__(/*! ../internals/hidden-keys */ "../node_modules/core-js/internals/hidden-keys.js");
 
 var OBJECT_ALREADY_INITIALIZED = 'Object already initialized';
-var TypeError = global.TypeError;
-var WeakMap = global.WeakMap;
+var TypeError = globalThis.TypeError;
+var WeakMap = globalThis.WeakMap;
 var set, get, has;
 
 var enforce = function (it) {
@@ -6842,17 +9143,17 @@ module.exports = Array.isArray || function isArray(argument) {
 /*!********************************************************!*\
   !*** ../node_modules/core-js/internals/is-callable.js ***!
   \********************************************************/
-/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+/***/ ((module) => {
 
 "use strict";
 
-var $documentAll = __webpack_require__(/*! ../internals/document-all */ "../node_modules/core-js/internals/document-all.js");
-
-var documentAll = $documentAll.all;
+// https://tc39.es/ecma262/#sec-IsHTMLDDA-internal-slot
+var documentAll = typeof document == 'object' && document.all;
 
 // `IsCallable` abstract operation
 // https://tc39.es/ecma262/#sec-iscallable
-module.exports = $documentAll.IS_HTMLDDA ? function (argument) {
+// eslint-disable-next-line unicorn/no-typeof-undefined -- required for testing
+module.exports = typeof documentAll == 'undefined' && documentAll !== undefined ? function (argument) {
   return typeof argument == 'function' || argument === documentAll;
 } : function (argument) {
   return typeof argument == 'function';
@@ -6921,13 +9222,8 @@ module.exports = function (it) {
 "use strict";
 
 var isCallable = __webpack_require__(/*! ../internals/is-callable */ "../node_modules/core-js/internals/is-callable.js");
-var $documentAll = __webpack_require__(/*! ../internals/document-all */ "../node_modules/core-js/internals/document-all.js");
 
-var documentAll = $documentAll.all;
-
-module.exports = $documentAll.IS_HTMLDDA ? function (it) {
-  return typeof it == 'object' ? it !== null : isCallable(it) || it === documentAll;
-} : function (it) {
+module.exports = function (it) {
   return typeof it == 'object' ? it !== null : isCallable(it);
 };
 
@@ -7025,7 +9321,7 @@ var TEMPLATE = String(String).split('String');
 
 var makeBuiltIn = module.exports = function (value, name, options) {
   if (stringSlice($String(name), 0, 7) === 'Symbol(') {
-    name = '[' + replace($String(name), /^Symbol\(([^)]*)\)/, '$1') + ']';
+    name = '[' + replace($String(name), /^Symbol\(([^)]*)\).*$/, '$1') + ']';
   }
   if (options && options.getter) name = 'get ' + name;
   if (options && options.setter) name = 'set ' + name;
@@ -7380,13 +9676,20 @@ module.exports = function (key) {
 
 "use strict";
 
-var global = __webpack_require__(/*! ../internals/global */ "../node_modules/core-js/internals/global.js");
+var IS_PURE = __webpack_require__(/*! ../internals/is-pure */ "../node_modules/core-js/internals/is-pure.js");
+var globalThis = __webpack_require__(/*! ../internals/global-this */ "../node_modules/core-js/internals/global-this.js");
 var defineGlobalProperty = __webpack_require__(/*! ../internals/define-global-property */ "../node_modules/core-js/internals/define-global-property.js");
 
 var SHARED = '__core-js_shared__';
-var store = global[SHARED] || defineGlobalProperty(SHARED, {});
+var store = module.exports = globalThis[SHARED] || defineGlobalProperty(SHARED, {});
 
-module.exports = store;
+(store.versions || (store.versions = [])).push({
+  version: '3.38.1',
+  mode: IS_PURE ? 'pure' : 'global',
+  copyright: '© 2014-2024 Denis Pushkarev (zloirock.ru)',
+  license: 'https://github.com/zloirock/core-js/blob/v3.38.1/LICENSE',
+  source: 'https://github.com/zloirock/core-js'
+});
 
 
 /***/ }),
@@ -7399,18 +9702,11 @@ module.exports = store;
 
 "use strict";
 
-var IS_PURE = __webpack_require__(/*! ../internals/is-pure */ "../node_modules/core-js/internals/is-pure.js");
 var store = __webpack_require__(/*! ../internals/shared-store */ "../node_modules/core-js/internals/shared-store.js");
 
-(module.exports = function (key, value) {
-  return store[key] || (store[key] = value !== undefined ? value : {});
-})('versions', []).push({
-  version: '3.33.2',
-  mode: IS_PURE ? 'pure' : 'global',
-  copyright: '© 2014-2023 Denis Pushkarev (zloirock.ru)',
-  license: 'https://github.com/zloirock/core-js/blob/v3.33.2/LICENSE',
-  source: 'https://github.com/zloirock/core-js'
-});
+module.exports = function (key, value) {
+  return store[key] || (store[key] = value || {});
+};
 
 
 /***/ }),
@@ -7424,11 +9720,11 @@ var store = __webpack_require__(/*! ../internals/shared-store */ "../node_module
 "use strict";
 
 /* eslint-disable es/no-symbol -- required for testing */
-var V8_VERSION = __webpack_require__(/*! ../internals/engine-v8-version */ "../node_modules/core-js/internals/engine-v8-version.js");
+var V8_VERSION = __webpack_require__(/*! ../internals/environment-v8-version */ "../node_modules/core-js/internals/environment-v8-version.js");
 var fails = __webpack_require__(/*! ../internals/fails */ "../node_modules/core-js/internals/fails.js");
-var global = __webpack_require__(/*! ../internals/global */ "../node_modules/core-js/internals/global.js");
+var globalThis = __webpack_require__(/*! ../internals/global-this */ "../node_modules/core-js/internals/global-this.js");
 
-var $String = global.String;
+var $String = globalThis.String;
 
 // eslint-disable-next-line es/no-object-getownpropertysymbols -- required for testing
 module.exports = !!Object.getOwnPropertySymbols && !fails(function () {
@@ -7524,7 +9820,8 @@ var min = Math.min;
 // `ToLength` abstract operation
 // https://tc39.es/ecma262/#sec-tolength
 module.exports = function (argument) {
-  return argument > 0 ? min(toIntegerOrInfinity(argument), 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
+  var len = toIntegerOrInfinity(argument);
+  return len > 0 ? min(len, 0x1FFFFFFFFFFFFF) : 0; // 2 ** 53 - 1 == 9007199254740991
 };
 
 
@@ -7701,10 +9998,10 @@ module.exports = DESCRIPTORS && fails(function () {
 
 "use strict";
 
-var global = __webpack_require__(/*! ../internals/global */ "../node_modules/core-js/internals/global.js");
+var globalThis = __webpack_require__(/*! ../internals/global-this */ "../node_modules/core-js/internals/global-this.js");
 var isCallable = __webpack_require__(/*! ../internals/is-callable */ "../node_modules/core-js/internals/is-callable.js");
 
-var WeakMap = global.WeakMap;
+var WeakMap = globalThis.WeakMap;
 
 module.exports = isCallable(WeakMap) && /native code/.test(String(WeakMap));
 
@@ -7719,14 +10016,14 @@ module.exports = isCallable(WeakMap) && /native code/.test(String(WeakMap));
 
 "use strict";
 
-var global = __webpack_require__(/*! ../internals/global */ "../node_modules/core-js/internals/global.js");
+var globalThis = __webpack_require__(/*! ../internals/global-this */ "../node_modules/core-js/internals/global-this.js");
 var shared = __webpack_require__(/*! ../internals/shared */ "../node_modules/core-js/internals/shared.js");
 var hasOwn = __webpack_require__(/*! ../internals/has-own-property */ "../node_modules/core-js/internals/has-own-property.js");
 var uid = __webpack_require__(/*! ../internals/uid */ "../node_modules/core-js/internals/uid.js");
 var NATIVE_SYMBOL = __webpack_require__(/*! ../internals/symbol-constructor-detection */ "../node_modules/core-js/internals/symbol-constructor-detection.js");
 var USE_SYMBOL_AS_UID = __webpack_require__(/*! ../internals/use-symbol-as-uid */ "../node_modules/core-js/internals/use-symbol-as-uid.js");
 
-var Symbol = global.Symbol;
+var Symbol = globalThis.Symbol;
 var WellKnownSymbolsStore = shared('wks');
 var createWellKnownSymbol = USE_SYMBOL_AS_UID ? Symbol['for'] || Symbol : Symbol && Symbol.withoutSetter || uid;
 
@@ -7760,7 +10057,7 @@ var INCORRECT_TO_LENGTH = fails(function () {
   return [].push.call({ length: 0x100000000 }, 1) !== 4294967297;
 });
 
-// V8 and Safari <= 15.4, FF < 23 throws InternalError
+// V8 <= 121 and Safari <= 15.4; FF < 23 throws InternalError
 // https://bugs.chromium.org/p/v8/issues/detail?id=12681
 var properErrorOnNonWritableLength = function () {
   try {
@@ -7885,7 +10182,9 @@ var __webpack_exports__ = {};
 
 var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ "../node_modules/@babel/runtime/helpers/interopRequireDefault.js");
 var _siteEditor = _interopRequireDefault(__webpack_require__(/*! ../../modules/site-editor/assets/js/site-editor */ "../core/app/modules/site-editor/assets/js/site-editor.js"));
+var _module = _interopRequireDefault(__webpack_require__(/*! ../../modules/import-export-customization/assets/js/module */ "../core/app/modules/import-export-customization/assets/js/module.js"));
 new _siteEditor.default();
+new _module.default();
 })();
 
 /******/ })()

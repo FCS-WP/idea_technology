@@ -53,7 +53,6 @@ class Social_Network_Provider {
 		}
 
 		return '';
-
 	}
 
 	public static function get_name_mapping( string $platform ): string {
@@ -61,6 +60,16 @@ class Social_Network_Provider {
 
 		if ( isset( self::$social_networks[ $platform ]['name'] ) ) {
 			return self::$social_networks[ $platform ]['name'];
+		}
+
+		return '';
+	}
+
+	public static function get_text_mapping( string $platform ): string {
+		static::init_social_networks_array_if_empty();
+
+		if ( isset( self::$social_networks[ $platform ]['text'] ) ) {
+			return self::$social_networks[ $platform ]['text'];
 		}
 
 		return '';
@@ -232,6 +241,10 @@ class Social_Network_Provider {
 			'icon' => 'fab fa-skype',
 			'name' => 'skype',
 		];
+	}
+
+	public static function build_messenger_link( string $username ) {
+		return 'https://m.me/' . $username;
 	}
 
 	public static function build_email_link( array $data, string $prefix ) {

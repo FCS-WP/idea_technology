@@ -43,10 +43,14 @@ class Module extends App {
 	/**
 	 * Enqueue Notes styles.
 	 */
-	private function enqueue_styles() {
+	public function enqueue_styles() {
+		if ( ! is_admin_bar_showing() ) {
+			return;
+		}
+
 		wp_enqueue_style(
 			'elementor-pro-notes-frontend',
-			$this->get_css_assets_url( 'modules/notes/frontend' ),
+			$this->get_css_assets_url( 'modules/notes' ),
 			[ 'elementor-icons' ],
 			ELEMENTOR_PRO_VERSION
 		);
@@ -163,7 +167,7 @@ class Module extends App {
 	}
 
 	private function on_elementor_pro_init() {
-		$has_license = API::is_license_active() && API::is_licence_has_feature( static::LICENSE_FEATURE_NAME );
+		$has_license = API::is_license_active();
 
 		if ( ! $has_license ) {
 			return;
@@ -196,6 +200,8 @@ class Module extends App {
 				$this->add_config();
 			} );
 
+			add_action( 'elementor/frontend/before_enqueue_styles', [ $this, 'enqueue_styles' ] );
+
 			add_action( 'elementor/frontend/after_register_scripts', function () {
 				$is_preview = Plugin::elementor()->preview->is_preview();
 
@@ -203,7 +209,6 @@ class Module extends App {
 					$this->enqueue_main_scripts();
 				}
 
-				$this->enqueue_styles();
 				$this->enqueue_app_initiator( $is_preview );
 			} );
 

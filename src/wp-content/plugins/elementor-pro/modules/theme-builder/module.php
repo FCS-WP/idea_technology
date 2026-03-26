@@ -8,12 +8,14 @@ use Elementor\Core\Admin\Menu\Main as MainMenu;
 use Elementor\Core\App\App;
 use Elementor\Core\Base\Document;
 use Elementor\TemplateLibrary\Source_Local;
+use Elementor\App\Modules\ImportExportCustomization\Utils as ImportExportCustomizationUtils;
 use ElementorPro\Base\Module_Base;
 use ElementorPro\Core\Utils;
 use ElementorPro\Modules\ThemeBuilder\AdminMenuItems\Theme_Builder_Menu_Item;
 use ElementorPro\Modules\ThemeBuilder\Classes;
 use ElementorPro\Modules\ThemeBuilder\Documents\Single;
 use ElementorPro\Modules\ThemeBuilder\Documents\Theme_Document;
+use ElementorPro\Modules\ThemeBuilder\ImportExportCustomization;
 use ElementorPro\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -114,15 +116,6 @@ class Module extends Module_Base {
 		return $document;
 	}
 
-	/**
-	 * @deprecated 3.1.0
-	 */
-	public function localize_settings() {
-		Plugin::elementor()->modules_manager->get_modules( 'dev-tools' )->deprecation->deprecated_function( __METHOD__, '3.1.0' );
-
-		return [];
-	}
-
 	public function document_config( $config, $post_id ) {
 		$document = $this->get_document( $post_id );
 
@@ -187,7 +180,7 @@ class Module extends Module_Base {
 		?>
 		<div id="elementor-new-template__form__location__wrapper" class="elementor-form-field">
 			<label for="elementor-new-template__form__location" class="elementor-form-field__label">
-				<?php echo esc_html__( 'Select a Location', 'elementor-pro' ); ?>
+				<?php echo esc_html__( 'Select a location', 'elementor-pro' ); ?>
 			</label>
 			<div class="elementor-form-field__select__wrapper">
 				<select id="elementor-new-template__form__location" class="elementor-form-field__select" name="meta_location">
@@ -217,7 +210,7 @@ class Module extends Module_Base {
 		?>
 		<div id="elementor-new-template__form__post-type__wrapper" class="elementor-form-field">
 			<label for="elementor-new-template__form__post-type" class="elementor-form-field__label">
-				<?php echo esc_html__( 'Select Post Type', 'elementor-pro' ); ?>
+				<?php echo esc_html__( 'Select post type', 'elementor-pro' ); ?>
 			</label>
 			<div class="elementor-form-field__select__wrapper">
 				<select
@@ -304,7 +297,7 @@ class Module extends Module_Base {
 
 	public function add_finder_items( array $categories ) {
 		$categories['create']['items']['theme-template'] = [
-			'title' => esc_html__( 'Add New Theme Template', 'elementor-pro' ),
+			'title' => esc_html__( 'Add new theme template', 'elementor-pro' ),
 			'icon' => 'plus-circle-o',
 			'url' => $this->get_admin_templates_url() . '#add_new',
 			'keywords' => [ 'template', 'theme', 'new', 'create' ],
@@ -352,10 +345,10 @@ class Module extends Module_Base {
 			$admin_notices = Plugin::elementor()->admin->get_component( 'admin-notices' );
 
 			$admin_notices->print_admin_notice( [
-				'title' => esc_html__( 'Meet the New Theme Builder: More Intuitive and Visual Than Ever', 'elementor-pro' ),
+				'title' => esc_html__( 'Meet the new Theme Builder: more intuitive and visual than ever', 'elementor-pro' ),
 				'description' => esc_html__( 'With the new Theme Builder you can visually manage every part of your site intuitively, making the task of designing a complete website that much easier', 'elementor-pro' ),
 				'button' => [
-					'text' => esc_html__( 'Try it Now', 'elementor-pro' ),
+					'text' => esc_html__( 'Try it now', 'elementor-pro' ),
 					'class' => 'elementor-button e-accent',
 					'url' => Plugin::elementor()->app->get_settings( 'menu_url' ),
 				],
@@ -444,6 +437,10 @@ class Module extends Module_Base {
 
 		require __DIR__ . '/api.php';
 
+		$this->add_component( 'import_export_import', new ImportExportCustomization\Import() );
+		$this->add_component( 'import_export_export', new ImportExportCustomization\Export() );
+		$this->add_component( 'import_export_revert', new ImportExportCustomization\Revert() );
+
 		$this->add_component( 'theme_support', new Classes\Theme_Support() );
 		$this->add_component( 'conditions', new Classes\Conditions_Manager() );
 		$this->add_component( 'templates_types', new Classes\Templates_Types_Manager() );
@@ -500,5 +497,9 @@ class Module extends Module_Base {
 
 		// Common
 		add_filter( 'elementor/finder/categories', [ $this, 'add_finder_items' ] );
+
+		add_filter( 'elementor/import-export-customization/export/templates_data', [ $this->get_component( 'import_export_export' ), 'add_theme_builder_to_export' ], 10, 3 );
+		add_filter( 'elementor/import-export-customization/import/templates_result', [ $this->get_component( 'import_export_import' ), 'add_theme_builder_to_import' ], 10, 4 );
+		add_action( 'elementor/import-export-customization/revert/templates', [ $this->get_component( 'import_export_revert' ), 'revert_theme_builder_templates_conditions' ], 10, 1 );
 	}
 }

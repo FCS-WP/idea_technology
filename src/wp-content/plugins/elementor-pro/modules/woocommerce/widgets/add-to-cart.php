@@ -5,17 +5,20 @@ use Elementor\Controls_Manager;
 use Elementor\Widget_Button;
 use ElementorPro\Base\Base_Widget_Trait;
 use ElementorPro\Core\Utils;
+use ElementorPro\Core\Utils\Hints;
 use ElementorPro\Modules\QueryControl\Module;
 use ElementorPro\Modules\Woocommerce\Traits\Product_Id_Trait;
+use ElementorPro\Modules\Woocommerce\Traits\Send_App_Plg_Trait;
+use ElementorPro\Plugin;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
 class Add_To_Cart extends Widget_Button {
-
 	use Base_Widget_Trait;
 	use Product_Id_Trait;
+	use Send_App_Plg_Trait;
 
 	public function get_name() {
 		return 'wc-add-to-cart';
@@ -37,6 +40,24 @@ class Add_To_Cart extends Widget_Button {
 		return [ 'woocommerce', 'shop', 'store', 'cart', 'product', 'button', 'add to cart' ];
 	}
 
+	public function has_widget_inner_wrapper(): bool {
+		return ! Plugin::elementor()->experiments->is_feature_active( 'e_optimized_markup' );
+	}
+
+	/**
+	 * Get style dependencies.
+	 *
+	 * Retrieve the list of style dependencies the widget requires.
+	 *
+	 * @since 3.24.0
+	 * @access public
+	 *
+	 * @return array Widget style dependencies.
+	 */
+	public function get_style_depends(): array {
+		return [ 'widget-woocommerce-product-add-to-cart' ];
+	}
+
 	public function on_export( $element ) {
 		unset( $element['settings']['product_id'] );
 
@@ -54,6 +75,8 @@ class Add_To_Cart extends Widget_Button {
 				'label' => esc_html__( 'Product', 'elementor-pro' ),
 			]
 		);
+
+		$this->maybe_add_send_app_promotion_control( $this );
 
 		$this->add_control(
 			'product_id',

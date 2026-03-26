@@ -2,6 +2,7 @@
 namespace ElementorPro\Modules\Slides\Widgets;
 
 use Elementor\Controls_Manager;
+use Elementor\Control_Media;
 use Elementor\Core\Kits\Documents\Tabs\Global_Typography;
 use Elementor\Group_Control_Background;
 use Elementor\Group_Control_Text_Shadow;
@@ -11,6 +12,7 @@ use Elementor\Repeater;
 use Elementor\Utils;
 use ElementorPro\Base\Base_Widget;
 use ElementorPro\Plugin;
+use ElementorPro\Modules\Slides\Controls\Control_Slides_Animation;
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
@@ -35,11 +37,29 @@ class Slides extends Base_Widget {
 	}
 
 	public function get_script_depends() {
-		return [ 'imagesloaded' ];
+		return [ 'imagesloaded', 'swiper' ];
 	}
 
 	protected function is_dynamic_content(): bool {
 		return false;
+	}
+
+	public function has_widget_inner_wrapper(): bool {
+		return ! Plugin::elementor()->experiments->is_feature_active( 'e_optimized_markup' );
+	}
+
+	/**
+	 * Get style dependencies.
+	 *
+	 * Retrieve the list of style dependencies the widget requires.
+	 *
+	 * @since 3.24.0
+	 * @access public
+	 *
+	 * @return array Widget style dependencies.
+	 */
+	public function get_style_depends(): array {
+		return [ 'e-swiper', 'widget-slides' ];
 	}
 
 	public static function get_button_sizes() {
@@ -57,6 +77,15 @@ class Slides extends Base_Widget {
 			'section_slides',
 			[
 				'label' => esc_html__( 'Slides', 'elementor-pro' ),
+			]
+		);
+
+		$this->add_control(
+			'slides_name',
+			[
+				'label' => esc_html__( 'Slides Name', 'elementor-pro' ),
+				'type' => Controls_Manager::TEXT,
+				'default' => esc_html__( 'Slides', 'elementor-pro' ),
 			]
 		);
 
@@ -86,10 +115,13 @@ class Slides extends Base_Widget {
 		$repeater->add_control(
 			'background_image',
 			[
-				'label' => _x( 'Image', 'Background Control', 'elementor-pro' ),
+				'label' => esc_html__( 'Image', 'elementor-pro' ),
 				'type' => Controls_Manager::MEDIA,
 				'selectors' => [
 					'{{WRAPPER}} {{CURRENT_ITEM}} .swiper-slide-bg' => 'background-image: url({{URL}})',
+				],
+				'default' => [
+					'url' => '',
 				],
 			]
 		);
@@ -97,13 +129,13 @@ class Slides extends Base_Widget {
 		$repeater->add_control(
 			'background_size',
 			[
-				'label' => _x( 'Size', 'Background Control', 'elementor-pro' ),
+				'label' => esc_html__( 'Size', 'elementor-pro' ),
 				'type' => Controls_Manager::SELECT,
 				'default' => 'cover',
 				'options' => [
-					'cover' => _x( 'Cover', 'Background Control', 'elementor-pro' ),
-					'contain' => _x( 'Contain', 'Background Control', 'elementor-pro' ),
-					'auto' => _x( 'Auto', 'Background Control', 'elementor-pro' ),
+					'cover' => esc_html__( 'Cover', 'elementor-pro' ),
+					'contain' => esc_html__( 'Contain', 'elementor-pro' ),
+					'auto' => esc_html__( 'Auto', 'elementor-pro' ),
 				],
 				'selectors' => [
 					'{{WRAPPER}} {{CURRENT_ITEM}} .swiper-slide-bg' => 'background-size: {{VALUE}}',
@@ -492,18 +524,27 @@ class Slides extends Base_Widget {
 						'description' => esc_html__( 'Lorem ipsum dolor sit amet consectetur adipiscing elit dolor', 'elementor-pro' ),
 						'button_text' => esc_html__( 'Click Here', 'elementor-pro' ),
 						'background_color' => '#833ca3',
+						'background_image' => [
+							'url' => '',
+						],
 					],
 					[
 						'heading' => esc_html__( 'Slide 2 Heading', 'elementor-pro' ),
 						'description' => esc_html__( 'Lorem ipsum dolor sit amet consectetur adipiscing elit dolor', 'elementor-pro' ),
 						'button_text' => esc_html__( 'Click Here', 'elementor-pro' ),
 						'background_color' => '#4054b2',
+						'background_image' => [
+							'url' => '',
+						],
 					],
 					[
 						'heading' => esc_html__( 'Slide 3 Heading', 'elementor-pro' ),
 						'description' => esc_html__( 'Lorem ipsum dolor sit amet consectetur adipiscing elit dolor', 'elementor-pro' ),
 						'button_text' => esc_html__( 'Click Here', 'elementor-pro' ),
 						'background_color' => '#1abc9c',
+						'background_image' => [
+							'url' => '',
+						],
 					],
 				],
 				'title_field' => '{{{ heading }}}',
@@ -704,32 +745,8 @@ class Slides extends Base_Widget {
 			'content_animation',
 			[
 				'label' => esc_html__( 'Content Animation', 'elementor-pro' ),
-				'type' => Controls_Manager::SELECT,
+				'type' => Control_Slides_Animation::TYPE,
 				'default' => 'fadeInUp',
-				'options' => [
-					'' => esc_html__( 'None', 'elementor-pro' ),
-					'fadeInDown' => esc_html__( 'Down', 'elementor-pro' ),
-					'fadeInUp' => esc_html__( 'Up', 'elementor-pro' ),
-					'fadeInRight' => esc_html__( 'Right', 'elementor-pro' ),
-					'fadeInLeft' => esc_html__( 'Left', 'elementor-pro' ),
-					'zoomIn' => esc_html__( 'Zoom', 'elementor-pro' ),
-				],
-				'assets' => [
-					'styles' => [
-						[
-							'name' => 'e-animations',
-							'conditions' => [
-								'terms' => [
-									[
-										'name' => 'content_animation',
-										'operator' => '!==',
-										'value' => '',
-									],
-								],
-							],
-						],
-					],
-				],
 			]
 		);
 
@@ -1282,7 +1299,25 @@ class Slides extends Base_Widget {
 			]
 		);
 
-		$swiper_class = Plugin::elementor()->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
+		$this->add_responsive_control(
+			'dots_gap',
+			[
+				'label' => esc_html__( 'Space Between Dots', 'elementor-pro' ),
+				'type' => Controls_Manager::SLIDER,
+				'size_units' => [ 'px', 'em', 'rem', 'custom' ],
+				'range' => [
+					'px' => [
+						'max' => 50,
+					],
+				],
+				'selectors' => [
+					'{{WRAPPER}} .swiper-pagination-bullet' => '--swiper-pagination-bullet-horizontal-gap: {{SIZE}}{{UNIT}}; --swiper-pagination-bullet-vertical-gap: {{SIZE}}{{UNIT}};',
+				],
+				'condition' => [
+					'navigation' => [ 'dots', 'both' ],
+				],
+			]
+		);
 
 		$this->add_responsive_control(
 			'dots_size',
@@ -1303,7 +1338,7 @@ class Slides extends Base_Widget {
 				],
 				'selectors' => [
 					'{{WRAPPER}} .swiper-pagination-bullet' => 'height: {{SIZE}}{{UNIT}}; width: {{SIZE}}{{UNIT}}',
-					'{{WRAPPER}} .' . $swiper_class . '-horizontal .swiper-pagination-progressbar' => 'height: {{SIZE}}{{UNIT}}',
+					'{{WRAPPER}} .swiper-horizontal .swiper-pagination-progressbar' => 'height: {{SIZE}}{{UNIT}}',
 					'{{WRAPPER}} .swiper-pagination-fraction' => 'font-size: {{SIZE}}{{UNIT}}',
 				],
 				'condition' => [
@@ -1351,6 +1386,20 @@ class Slides extends Base_Widget {
 			return;
 		}
 
+		$optimized_markup = Plugin::elementor()->experiments->is_feature_active( 'e_optimized_markup' );
+		$direction = is_rtl() ? 'rtl' : 'ltr';
+
+		$this->add_render_attribute( [
+			'wrapper' => [
+				'class' => [ 'elementor-slides-wrapper', 'elementor-main-swiper', 'swiper' ],
+				'role' => 'region',
+				'aria-roledescription' => 'carousel',
+				'aria-label' => $settings['slides_name'],
+				'dir' => $direction,
+				'data-animation' => $settings['content_animation'],
+			],
+		] );
+
 		$title_tag = Utils::validate_html_tag( $settings['slides_title_tag'] );
 		$description_tag = Utils::validate_html_tag( $settings['slides_description_tag'] );
 
@@ -1363,7 +1412,7 @@ class Slides extends Base_Widget {
 		$slides = [];
 		$slide_count = 0;
 
-		foreach ( $settings['slides'] as $slide ) {
+		foreach ( $settings['slides'] as $slide_index => $slide ) {
 			$slide_html = '';
 			$btn_attributes = '';
 			$slide_attributes = '';
@@ -1380,6 +1429,17 @@ class Slides extends Base_Widget {
 					$slide_element = 'a';
 					$slide_attributes = $this->get_render_attribute_string( 'slide_link' . $slide_count );
 				}
+			}
+
+			$this->add_render_attribute( 'slide_bg_' . $slide_index, 'class', 'swiper-slide-bg' );
+
+			if ( $slide['background_ken_burns'] ) {
+				$this->add_render_attribute( 'slide_bg_' . $slide_index, 'class', [ 'elementor-ken-burns', 'elementor-ken-burns--' . $slide['zoom_direction'] ] );
+			}
+
+			if ( ! empty( $slide['background_image']['id'] ) ) {
+				$this->add_render_attribute( 'slide_bg_' . $slide_index, 'role', 'img' );
+				$this->add_render_attribute( 'slide_bg_' . $slide_index, 'aria-label', Control_Media::get_image_alt( $slide['background_image'] ) );
 			}
 
 			$slide_html .= '<' . $slide_element . ' class="swiper-slide-inner" ' . $slide_attributes . '>';
@@ -1404,49 +1464,42 @@ class Slides extends Base_Widget {
 				$slide_html = '<div class="elementor-background-overlay"></div>' . $slide_html;
 			}
 
-			$ken_class = '';
+			$slide_html = '<div ' . $this->get_render_attribute_string( 'slide_bg_' . $slide_index ) . '></div>' . $slide_html;
 
-			if ( $slide['background_ken_burns'] ) {
-				$ken_class = ' elementor-ken-burns elementor-ken-burns--' . $slide['zoom_direction'];
-			}
-
-			$slide_html = '<div class="swiper-slide-bg' . esc_attr( $ken_class ) . '" role="img"></div>' . $slide_html;
-
-			$slides[] = '<div class="elementor-repeater-item-' . esc_attr( $slide['_id'] ) . ' swiper-slide">' . $slide_html . '</div>';
+			$slides[] = '<div class="elementor-repeater-item-' . esc_attr( $slide['_id'] ) . ' swiper-slide" role="group" aria-roledescription="slide">' . $slide_html . '</div>';
 			$slide_count++;
 		}
-
-		$direction = is_rtl() ? 'rtl' : 'ltr';
 
 		$show_dots = ( in_array( $settings['navigation'], [ 'dots', 'both' ] ) );
 		$show_arrows = ( in_array( $settings['navigation'], [ 'arrows', 'both' ] ) );
 
 		$slides_count = count( $settings['slides'] );
-		$swiper_class = Plugin::elementor()->experiments->is_feature_active( 'e_swiper_latest' ) ? 'swiper' : 'swiper-container';
 		?>
+		<?php if ( ! $optimized_markup ) : ?>
 		<div class="elementor-swiper">
-			<div class="elementor-slides-wrapper elementor-main-swiper <?php echo esc_attr( $swiper_class ); ?>" dir="<?php Utils::print_unescaped_internal_string( $direction ); ?>" data-animation="<?php echo esc_attr( $settings['content_animation'] ); ?>">
+		<?php endif; ?>
+			<div <?php $this->print_render_attribute_string( 'wrapper' ); ?>>
 				<div class="swiper-wrapper elementor-slides">
 					<?php // PHPCS - Slides for each is safe. ?>
 					<?php echo implode( '', $slides ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 				<?php if ( 1 < $slides_count ) : ?>
+					<?php if ( $show_arrows ) : ?>
+						<div class="elementor-swiper-button elementor-swiper-button-prev" role="button" tabindex="0" aria-label="<?php echo esc_attr__( 'Previous slide', 'elementor-pro' ); ?>">
+							<?php $this->render_swiper_button( 'previous' ); ?>
+						</div>
+						<div class="elementor-swiper-button elementor-swiper-button-next" role="button" tabindex="0" aria-label="<?php echo esc_attr__( 'Next slide', 'elementor-pro' ); ?>">
+							<?php $this->render_swiper_button( 'next' ); ?>
+						</div>
+					<?php endif; ?>
 					<?php if ( $show_dots ) : ?>
 						<div class="swiper-pagination"></div>
 					<?php endif; ?>
-					<?php if ( $show_arrows ) : ?>
-						<div class="elementor-swiper-button elementor-swiper-button-prev" role="button" tabindex="0">
-							<?php $this->render_swiper_button( 'previous' ); ?>
-							<span class="elementor-screen-only"><?php echo esc_html__( 'Previous slide', 'elementor-pro' ); ?></span>
-						</div>
-						<div class="elementor-swiper-button elementor-swiper-button-next" role="button" tabindex="0">
-							<?php $this->render_swiper_button( 'next' ); ?>
-							<span class="elementor-screen-only"><?php echo esc_html__( 'Next slide', 'elementor-pro' ); ?></span>
-						</div>
-					<?php endif; ?>
 				<?php endif; ?>
 			</div>
+		<?php if ( ! $optimized_markup ) : ?>
 		</div>
+		<?php endif; ?>
 		<?php
 	}
 
@@ -1470,20 +1523,41 @@ class Slides extends Base_Widget {
 				buttonSize       = settings.button_size,
 				titleTag         = elementor.helpers.validateHTMLTag( settings.slides_title_tag ),
 				descriptionTag   = elementor.helpers.validateHTMLTag( settings.slides_description_tag );
-		#>
-		<div class="elementor-swiper">
-			<div class="elementor-slides-wrapper elementor-main-swiper {{ elementorFrontend.config.swiperClass }}" dir="{{ direction }}" data-animation="{{ settings.content_animation }}">
-				<div class="swiper-wrapper elementor-slides">
-					<# jQuery.each( settings.slides, function( index, slide ) { #>
-						<div class="elementor-repeater-item-{{ _.escape( slide._id ) }} swiper-slide">
-							<#
-							var kenClass = '';
+				optimizedMarkup  = elementorCommon.config.experimentalFeatures.e_optimized_markup;
 
-							if ( '' != slide.background_ken_burns ) {
-								kenClass = ' elementor-ken-burns elementor-ken-burns--' + _.escape( slide.zoom_direction );
-							}
-							#>
-							<div class="swiper-slide-bg{{ kenClass }}" role="img"></div>
+		view.addRenderAttribute(
+			'wrapper',
+			{
+				'class': [ 'elementor-slides-wrapper', 'elementor-main-swiper', elementorFrontend.config.swiperClass ],
+				'role': 'region',
+				'aria-roledescription': 'carousel',
+				'aria-label': settings.slides_name,
+				'dir': direction,
+				'data-animation': settings.content_animation,
+			}
+		);
+		#>
+		<# if ( ! optimizedMarkup ) { #>
+		<div class="elementor-swiper">
+		<# } #>
+			<div {{{ view.getRenderAttributeString( 'wrapper' ) }}}>
+				<div class="swiper-wrapper elementor-slides">
+					<#
+					jQuery.each( settings.slides, function( index, slide ) {
+
+						view.addRenderAttribute( 'slide_bg_' + index, 'class', 'swiper-slide-bg' );
+
+						if ( '' != slide.background_ken_burns ) {
+							view.addRenderAttribute( 'slide_bg_' + index, 'class', [ 'elementor-ken-burns', 'elementor-ken-burns--' + _.escape( slide.zoom_direction ) ] );
+						}
+
+						if ( slide.background_image.id ) {
+							view.addRenderAttribute( 'slide_bg_' + index, 'role', 'img' );
+							view.addRenderAttribute( 'slide_bg_' + index, 'aria-label', slide.background_image.alt || '' );
+						}
+						#>
+						<div class="elementor-repeater-item-{{ _.escape( slide._id ) }} swiper-slide" role="group" aria-roledescription="slide">
+							<div {{{ view.getRenderAttributeString( 'slide_bg_' + index ) }}}></div>
 							<# if ( 'yes' === slide.background_overlay ) { #>
 							<div class="elementor-background-overlay"></div>
 							<# } #>
@@ -1504,22 +1578,22 @@ class Slides extends Base_Widget {
 					<# } ); #>
 				</div>
 				<# if ( 1 < settings.slides.length ) { #>
+					<# if ( showArrows ) { #>
+						<div class="elementor-swiper-button elementor-swiper-button-prev" role="button" tabindex="0" aria-label="<?php echo esc_attr__( 'Previous slide', 'elementor-pro' ); ?>">
+							<i class="eicon-chevron-{{ prev }}" aria-hidden="true"></i>
+						</div>
+						<div class="elementor-swiper-button elementor-swiper-button-next" role="button" tabindex="0" aria-label="<?php echo esc_attr__( 'Next slide', 'elementor-pro' ); ?>">
+							<i class="eicon-chevron-{{ next }}" aria-hidden="true"></i>
+						</div>
+					<# } #>
 					<# if ( showDots ) { #>
 						<div class="swiper-pagination"></div>
 					<# } #>
-					<# if ( showArrows ) { #>
-						<div class="elementor-swiper-button elementor-swiper-button-prev" role="button" tabindex="0">
-							<i class="eicon-chevron-{{ prev }}" aria-hidden="true"></i>
-							<span class="elementor-screen-only"><?php echo esc_html__( 'Previous slide', 'elementor-pro' ); ?></span>
-						</div>
-						<div class="elementor-swiper-button elementor-swiper-button-next" role="button" tabindex="0">
-							<i class="eicon-chevron-{{ next }}" aria-hidden="true"></i>
-							<span class="elementor-screen-only"><?php echo esc_html__( 'Next slide', 'elementor-pro' ); ?></span>
-						</div>
-					<# } #>
 				<# } #>
 			</div>
+		<# if ( ! optimizedMarkup ) { #>
 		</div>
+		<# } #>
 		<?php
 	}
 

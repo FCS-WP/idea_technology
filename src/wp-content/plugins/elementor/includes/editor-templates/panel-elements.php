@@ -55,9 +55,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 <script type="text/template" id="tmpl-elementor-panel-elements-category">
 	<button class="elementor-panel-heading elementor-panel-category-title">
 		<span class="elementor-panel-heading-toggle">
-			<i class="eicon" aria-hidden="true"></i>
+			<i class="eicon-caret-right" aria-hidden="true"></i>
 		</span>
 		<span class="elementor-panel-heading-title">{{{ title }}}</span>
+		<?php do_action( 'elementor/editor/templates/panel/category' ); ?>
 		<# if ( 'undefined' !== typeof promotion && promotion ) { #>
 			<span class="elementor-panel-heading-promotion">
 				<a href="{{{ promotion.url }}}" target="_blank">
@@ -69,11 +70,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<div class="elementor-panel-category-items elementor-responsive-panel"></div>
 </script>
 
-<script type="text/template" id="tmpl-elementor-panel-elements-notice">
-	<div class="elementor-panel-notice">
-	</div>
-</script>
-
 <script type="text/template" id="tmpl-elementor-panel-element-search">
 	<label for="elementor-panel-elements-search-input" class="screen-reader-text"><?php echo esc_html__( 'Search Widget:', 'elementor' ); ?></label>
 	<input type="search" id="elementor-panel-elements-search-input" placeholder="<?php esc_attr_e( 'Search Widget...', 'elementor' ); ?>" autocomplete="off"/>
@@ -82,8 +78,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 <script type="text/template" id="tmpl-elementor-element-library-element">
 	<button class="elementor-element">
-		<# if ( false === obj.editable ) { #>
+	<# if ( obj.integration ) { #>
+			<i class="eicon-plug"></i>
+		<# } else if ( false === obj.editable ) { #>
 			<i class="eicon-lock"></i>
+		<# } #>
+		<# if ( obj.categories.includes( 'v4-elements' ) ) { #>
+			<i class="eicon-atomic"></i>
 		<# } #>
 		<div class="icon">
 			<i class="{{ icon }}" aria-hidden="true"></i>
