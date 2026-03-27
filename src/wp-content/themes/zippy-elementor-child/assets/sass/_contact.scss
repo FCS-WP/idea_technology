@@ -1,0 +1,12 @@
+#contact-form {
+    form {
+        input {
+
+            &:focus,
+            &:focus-visible {
+                outline: none !important;
+                border: none !important;
+            }
+        }
+    }
+}

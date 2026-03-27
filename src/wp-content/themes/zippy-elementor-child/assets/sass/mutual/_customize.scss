@@ -4,7 +4,6 @@ p {
 }
 
 /* Button Style */
-
 .btn-custom {
   .elementor-button {
     position: relative;
@@ -34,4 +33,10 @@ p {
       color: #fff;
     }
   }
+}
+
+
+/* Box Shadow Custom */
+.box-shadow-1 {
+  box-shadow: rgba(149, 157, 165, 0.079) 0px 8px 24px;
 }
