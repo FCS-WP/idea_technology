@@ -1,0 +1,42 @@
+/* Font Style */
+p {
+  margin: 0px !important;
+}
+
+/* Button Style */
+.btn-custom {
+  .elementor-button {
+    position: relative;
+    display: inline-flex;
+    // align-items: center;
+    justify-content: center;
+    background-color: var(--e-global-color-primary);
+    overflow: hidden;
+    z-index: 1;
+    transition: color 0.3s ease;
+    
+    &::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: var(--e-global-color-secondary);
+      transform-origin: left center;
+      transform: scaleX(0);
+      transition: transform 0.35s ease;
+      z-index: -1;
+    }
+    &:hover::before {
+      transform: scaleX(1);
+    }
+
+    &:hover {
+      color: #fff;
+    }
+  }
+}
+
+
+/* Box Shadow Custom */
+.box-shadow-1 {
+  box-shadow: rgba(149, 157, 165, 0.079) 0px 8px 24px;
+}
